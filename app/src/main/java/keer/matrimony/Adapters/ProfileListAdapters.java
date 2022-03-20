@@ -1,45 +1,32 @@
 package keer.matrimony.Adapters;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
 import java.util.List;
 
 import keer.matrimony.CONSTANTS;
 import keer.matrimony.R;
-import keer.matrimony.UIFragments.ProfileDetails;
 import keer.matrimony.models.data;
-import keer.matrimony.ui.HomeActivity;
-import keer.matrimony.ui.dashboard.DashboardFragment;
 
 public class ProfileListAdapters extends RecyclerView.Adapter<ProfileListAdapters.holder> {
     List<data> list;
@@ -124,10 +111,12 @@ public class ProfileListAdapters extends RecyclerView.Adapter<ProfileListAdapter
             public void onClick(View v) {
 
 //                activity.getFragmentManager().beginTransaction().replace( R.id.navigation_home, new DashboardFragment()).commit();
-                ((FragmentActivity)v.getContext()).getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_home, new ProfileDetails( list.get(position))).addToBackStack("nav")
-                        .commit();
+                Navigation.findNavController(v).navigate(R.id.action_navigation_dashboard_to_navigationDetails2);
+                CONSTANTS.DATAs = list.get(position);
+//                ((FragmentActivity)v.getContext()).getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.nav_host_fragment_activity_home, new ProfileDetails( list.get(position))).addToBackStack("dashboard")
+//                        .commit();
               /*  ((HomeActivity) v.getContext()).getFragmentManager().beginTransaction()
                         .replace( R.id.navigation_home, new DashboardFragment())
                         .commit();*/

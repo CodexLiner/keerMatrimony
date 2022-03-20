@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import keer.matrimony.ui.MainActivity;
 import keer.matrimony.databinding.FragmentSignUpBinding;
 
 /**
@@ -71,7 +70,9 @@ public class SignUpFragment extends Fragment {
        binding = FragmentSignUpBinding.inflate(inflater);
 //        complexion status
         String[] subcast= {
-                "Occupation Type" , "Bakery work" , "Oil extraction" , "NGO service"
+                "Select Subcast" , "नमचूड़िया " , "वाण्या" , "दायमा " , "राठौर  ","आकड़ा  ","वामण ","गाडरी",
+                "उवाड  " , "नायर " , "लोहरया  " , "हिकडया  ","जाट   ","सोलंकी  ","ब्यल्छा ",
+                "माली  " , "रात्या " , "भलंग  " , "टोक "
         };
         ArrayAdapter<String> subcastAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, subcast);
         binding.subcast.setAdapter(subcastAdapter);
@@ -90,7 +91,7 @@ public class SignUpFragment extends Fragment {
         });
 //        country status
         String[] country= {
-                "Occupation Type" , "Bakery work" , "Oil extraction" , "NGO service"
+                "Select Country" , "India"
         };
         ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, country);
         binding.country.setAdapter(countryAdapter);
@@ -108,9 +109,46 @@ public class SignUpFragment extends Fragment {
             }
         });
 //        state status
-        String[] state= {
-                "Occupation Type" , "Bakery work" , "Oil extraction" , "NGO service"
-        };
+        String[] state = { "Andhra Pradesh",
+                "Arunachal Pradesh",
+                "Assam",
+                "Bihar",
+                "Chhattisgarh",
+                "Goa",
+                "Gujarat",
+                "Haryana",
+                "Himachal Pradesh",
+                "Jammu and Kashmir",
+                "Jharkhand",
+                "Karnataka",
+                "Kerala",
+                "Madhya Pradesh",
+                "Maharashtra",
+                "Manipur",
+                "Meghalaya",
+                "Mizoram",
+                "Nagaland",
+                "Odisha",
+                "Punjab",
+                "Rajasthan",
+                "Sikkim",
+                "Tamil Nadu",
+                "Telangana",
+                "Tripura",
+                "Uttarakhand",
+                "Uttar Pradesh",
+                "West Bengal",
+                "Andaman and Nicobar Islands",
+                "Chandigarh",
+                "Dadra and Nagar Haveli",
+                "Daman and Diu",
+                "Delhi",
+                "Lakshadweep",
+                "Puducherry" };
+
+//        String[] state= {
+//                "Select State" , "Bakery work" , "Oil extraction" , "NGO service"
+//        };
         ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, state);
         binding.state.setAdapter(stateAdapter);
         binding.state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -135,12 +173,13 @@ public class SignUpFragment extends Fragment {
        binding.nextButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               startActivity(new Intent(getContext() , MainActivity.class));
+              //  startActivity(new Intent(getContext() , MainActivity.class));
                first =  binding.userFirst.getText().toString();
                last =  binding.userLastName.getText().toString();
                email =  binding.userEmail.getText().toString();
                mobile =  binding.userMobile.getText().toString();
                password =  binding.userPassword.getText().toString();
+               String city =  binding.userCity.getText().toString();
                if (TextUtils.isEmpty(first)){
                    Toast.makeText(getActivity(), "Enter First Name", Toast.LENGTH_SHORT).show();
                    return;
@@ -159,6 +198,10 @@ public class SignUpFragment extends Fragment {
                }
                if (TextUtils.isEmpty(dob)){
                    Toast.makeText(getActivity(), "Select Birth Date First", Toast.LENGTH_SHORT).show();
+                   return;
+               }
+               if (TextUtils.isEmpty(city)){
+                   Toast.makeText(getActivity(), "Enter City First", Toast.LENGTH_SHORT).show();
                    return;
                }
 

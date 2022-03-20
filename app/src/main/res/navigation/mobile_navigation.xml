@@ -19,7 +19,11 @@
         android:id="@+id/navigation_dashboard"
         android:name="keer.matrimony.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigationDetails2"
+            app:destination="@id/navigationDetails" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -31,4 +35,19 @@
         android:name="keer.matrimony.ui.search.SearchFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/search_fragment" />
+
+    <fragment
+        android:id="@+id/navigationDetails"
+        android:name="keer.matrimony.UIFragments.ProfileDetails"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/profile_list_layout" >
+        <action
+            app:popUpTo="@id/navigation_dashboard"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_navigationDetails_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+        <action
+            android:id="@+id/action_navigationDetails_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>

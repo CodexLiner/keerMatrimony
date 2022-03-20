@@ -1,26 +1,20 @@
 package keer.matrimony.UIFragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import keer.matrimony.CONSTANTS;
-import keer.matrimony.R;
-import keer.matrimony.databinding.FragmentPersonalDetailsBinding;
 import keer.matrimony.databinding.FragmentProfileDetailsBinding;
 import keer.matrimony.models.data;
+import keer.matrimony.ui.Activitys.HomeActivity;
 
 public class ProfileDetails extends Fragment {
     @NonNull FragmentProfileDetailsBinding binding;
@@ -63,17 +57,11 @@ public class ProfileDetails extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        data = CONSTANTS.DATAs;
         binding = FragmentProfileDetailsBinding.inflate(inflater);
         // Inflate the layout for this fragment
-        OnBackPressedCallback callback =  new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                Toast.makeText(getContext(), "in profile", Toast.LENGTH_SHORT).show();
-//                getActivity().onBackPressed();
-            }
+        ((HomeActivity) getActivity()).setActionBarTitle(data.getFirst_name()+" "+data.getLast_name());
 
-        };
-        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
         if (data.getDob()!=null){
             binding.dob.setText(data.getDob());
             binding.dob2.setText(data.getDob());

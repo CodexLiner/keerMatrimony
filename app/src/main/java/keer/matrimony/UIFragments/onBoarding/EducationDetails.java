@@ -18,9 +18,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import keer.matrimony.CONSTANTS;
-import keer.matrimony.ui.MainActivity;
-import keer.matrimony.R;
+import keer.matrimony.database.userDatabaseHelper;
+import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.databinding.FragmentEducationDetailsBinding;
+import keer.matrimony.ui.Activitys.MainActivity;
+import keer.matrimony.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -182,9 +184,11 @@ public class EducationDetails extends Fragment {
                 map.put("ocu_detail" , Prof);
                 map.put("anu_income" , Annual);
                 Log.d("TAG", "onResponseX: "+map.toString());
-                ((MainActivity) getActivity()).setPersonalDetails(map , CONSTANTS.EDUCATIONDETAILS , 2);
+                userDatabaseHelper db = new userDatabaseHelper(getContext());
+                userDatabaseModel model = db .getUser(0);
+                ((MainActivity) getActivity()).setPersonalDetails(map , CONSTANTS.EDUCATIONDETAILS , model.getId());
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                EducationDetails educationDetails = new EducationDetails();
+                PartnerPrefrences educationDetails = new PartnerPrefrences();
                 transaction.replace(R.id.ContainerMain , educationDetails);
                 transaction.addToBackStack(null);
                 transaction.commit();

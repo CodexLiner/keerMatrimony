@@ -1,5 +1,6 @@
 package keer.matrimony.ui.dashboard;
 
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -7,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -27,8 +28,10 @@ import java.util.List;
 
 import keer.matrimony.Adapters.ProfileListAdapters;
 import keer.matrimony.CONSTANTS;
+import keer.matrimony.R;
 import keer.matrimony.databinding.FragmentDashboardBinding;
 import keer.matrimony.models.data;
+import keer.matrimony.ui.Activitys.HomeActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -44,6 +47,9 @@ public class DashboardFragment extends Fragment {
         DashboardViewModel dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
 
+        ((HomeActivity) getActivity()).setActionBarTitle("Latest Profiles");
+        BottomNavigationView bm = getActivity().findViewById(R.id.nav_view);
+        bm.setSelectedItemId(R.id.navigation_dashboard);
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         binding.profileRec.setLayoutManager(new LinearLayoutManager(getContext() , RecyclerView.VERTICAL , false));

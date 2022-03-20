@@ -1,19 +1,21 @@
-package keer.matrimony.ui;
+package keer.matrimony.ui.Activitys;
 
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -24,21 +26,16 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import keer.matrimony.CONSTANTS;
 import keer.matrimony.R;
-import keer.matrimony.database.userDatabaseHelper;
 import keer.matrimony.databinding.ActivityHomeBinding;
 import keer.matrimony.models.data;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class HomeActivity extends AppCompatActivity {
@@ -52,7 +49,11 @@ public class HomeActivity extends AppCompatActivity {
 
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        ActionBar actionBar = getSupportActionBar();
 
+        // showing the back button in action bar
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -67,6 +68,11 @@ public class HomeActivity extends AppCompatActivity {
         if (getSupportActionBar()!=null){
             getSupportActionBar().setTitle(title);
         }
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        onBackPressed();
+        return false;
     }
     public void getProfiles(){
         Log.d("TAG", "getProfiles: runn ");
@@ -114,5 +120,12 @@ public class HomeActivity extends AppCompatActivity {
             Log.i("MainActivity", "nothing on backstack, calling super");
             super.onBackPressed();
         }
+    }
+    public void removeFragment(Fragment fragment){
+        androidx.fragment.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.remove(fragment);
+        fragmentTransaction.commit();
     }
 }

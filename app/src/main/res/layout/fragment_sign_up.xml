@@ -274,6 +274,30 @@
                 android:layout_height="match_parent"/>
         </LinearLayout>
         <com.google.android.material.textfield.TextInputLayout
+            android:padding="0dp"
+            android:layout_gravity="center"
+            android:gravity="start"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidth="0.5dp"
+            app:boxStrokeWidthFocused="0.5dp"
+            app:hintTextColor="@color/black"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter City">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center|start"
+                android:layout_gravity="center"
+                android:drawablePadding="0dp"
+                android:id="@+id/userCity"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"

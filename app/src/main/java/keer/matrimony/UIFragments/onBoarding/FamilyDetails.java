@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import keer.matrimony.ui.MainActivity;
+import keer.matrimony.ui.Activitys.MainActivity;
 import keer.matrimony.R;
 
 /**

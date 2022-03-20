@@ -12,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,10 +35,9 @@ import keer.matrimony.Adapters.ProfileListAdapters;
 
 import keer.matrimony.CONSTANTS;
 import keer.matrimony.R;
-import keer.matrimony.UIFragments.ProfileDetails;
-import keer.matrimony.models.data;
-import keer.matrimony.ui.HomeActivity;
 import keer.matrimony.databinding.FragmentHomeBinding;
+import keer.matrimony.models.data;
+import keer.matrimony.ui.Activitys.HomeActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;

@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KeerMatrimony">
         <activity
-            android:name=".ui.splash"
+            android:name=".ui.Activitys.splash"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,18 +21,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.HomeActivity"
+            android:name=".ui.Activitys.HomeActivity"
             android:exported="true"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.CustomeTheme">
-
         </activity>
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.Activitys.LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.Activitys.MainActivity"
             android:exported="true" />
     </application>
 

@@ -70,7 +70,10 @@ public class userDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
       try{
-          Cursor cursor = db.query(userDatabaseModel.TABLE_NAME,
+          Cursor cursor = db.rawQuery("select * from "
+                  +userDatabaseModel.TABLE_NAME+" where "+userDatabaseModel.ID+"=?" , new String[]
+          {String.valueOf(id)});
+/*          Cursor cursor = db.query(userDatabaseModel.TABLE_NAME,
                   new String[]{
                           userDatabaseModel.ID ,
                           userDatabaseModel.NAME ,
@@ -88,7 +91,7 @@ public class userDatabaseHelper extends SQLiteOpenHelper {
                           userDatabaseModel.CITY ,
                           userDatabaseModel.STATUS },
                   userDatabaseModel.ID + "=?",
-                  new String[]{String.valueOf(id)}, null, null, null, null);
+                  new String[]{String.valueOf(id)}, null, null, null, null);*/
 
           if (cursor != null)
               cursor.moveToFirst();

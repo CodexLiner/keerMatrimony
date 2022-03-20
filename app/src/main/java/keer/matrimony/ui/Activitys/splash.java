@@ -1,4 +1,4 @@
-package keer.matrimony.ui;
+package keer.matrimony.ui.Activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,13 +17,14 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.sql.Time;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import keer.matrimony.CONSTANTS;
 import keer.matrimony.R;
+import keer.matrimony.database.userDatabaseHelper;
+import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.models.data;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -38,14 +39,23 @@ public class splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         getProfiles();
+        userDatabaseHelper db = new userDatabaseHelper(this);
+        userDatabaseModel model = db.getUser(0);
+
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                startActivity(new Intent(getApplicationContext() , HomeActivity.class));
-                overridePendingTransition(0,0);
+
+                if (model!=null){
+                    startActivity(new Intent(getApplicationContext() , HomeActivity.class));
+                    overridePendingTransition(0,0);
+                }else {
+                    startActivity(new Intent(getApplicationContext() , LoginActivity.class));
+                    overridePendingTransition(0,0);
+                }
                 finishAffinity();
             }
-        },100);
+        },2000);
     }
     public void getProfiles(){
         Log.d("TAG", "getProfiles: runn ");
@@ -72,8 +82,7 @@ public class splash extends AppCompatActivity {
                     Handler mHandler = new Handler(Looper.getMainLooper());
                     JSONObject jsonResponse = new JSONObject(response.body().string());
                     Type type = new TypeToken<List<data>>(){}.getType();
-                    List<data> dataList = gson.fromJson(jsonResponse.getJSONObject("detail").optString("data"), type);
-                    CONSTANTS.DATA = dataList;
+                    CONSTANTS.DATA = gson.fromJson(jsonResponse.getJSONObject("detail").optString("data"), type);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

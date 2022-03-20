@@ -15,9 +15,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import keer.matrimony.CONSTANTS;
-import keer.matrimony.ui.MainActivity;
-import keer.matrimony.R;
+import keer.matrimony.database.userDatabaseHelper;
+import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.databinding.FragmentContactInformationBinding;
+import keer.matrimony.ui.Activitys.HomeActivity;
+import keer.matrimony.ui.Activitys.MainActivity;
+import keer.matrimony.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,7 +64,7 @@ public class ContactInformation extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentContactInformationBinding.inflate(inflater);
-        ((MainActivity) getActivity()).setActionBarTitle("Contact Details");
+        ((HomeActivity) getActivity()).setActionBarTitle("Contact Details");
         final String[] fatherNumber = new String[1];
         final String[] whatsappNumber = new String[1];
         final String[] Pmadd = new String[1];
@@ -101,7 +104,9 @@ public class ContactInformation extends Fragment {
                 map.put("whatsapp_no" , whatsappNumber[0]);
                 map.put("present_addr" , perAdd[0]);
                 map.put("permanent_addr" , Pmadd[0]);
-                ((MainActivity) getActivity()).setPersonalDetails(map , CONSTANTS.CONTACTINFO , 2);
+                userDatabaseHelper db = new userDatabaseHelper(getContext());
+                userDatabaseModel model = db .getUser(0);
+                ((MainActivity) getActivity()).setPersonalDetails(map , CONSTANTS.CONTACTINFO , model.getId());
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 EducationDetails educationDetails = new EducationDetails();
                 transaction.replace(R.id.ContainerMain , educationDetails);

@@ -1,7 +1,5 @@
 package keer.matrimony.ui.search;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,9 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import keer.matrimony.R;
 import keer.matrimony.databinding.SearchFragmentBinding;
-import keer.matrimony.ui.LoginActivity;
+import keer.matrimony.ui.Activitys.HomeActivity;
+import keer.matrimony.ui.Activitys.LoginActivity;
 
 public class SearchFragment extends Fragment {
     SearchFragmentBinding binding;
@@ -29,6 +27,7 @@ public class SearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = SearchFragmentBinding.inflate(inflater);
+        ((HomeActivity) getActivity()).setActionBarTitle("Search Profile");
         binding.buttonPanel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -12,5 +12,6 @@ public class CONSTANTS {
     public static final String RELIGIOUS = "update-religious-details/";
     public static final String CONTACTINFO = "update-contact-details";
     public static List<data> DATA ;
+    public static data DATAs ;
     public static String mediaType = "application/json; charset=utf-8";
 }

@@ -1,4 +1,4 @@
-package keer.matrimony.ui;
+package keer.matrimony.ui.Activitys;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import java.util.Map;
 import keer.matrimony.CONSTANTS;
 import keer.matrimony.R;
 import keer.matrimony.UIFragments.onBoarding.EducationDetails;
+import keer.matrimony.UIFragments.onBoarding.PersonalDetails;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .add(R.id.ContainerMain, EducationDetails.class, null)
+                .add(R.id.ContainerMain, PersonalDetails.class, null)
                 .commit();
     }
     public void setActionBarTitle(String title){

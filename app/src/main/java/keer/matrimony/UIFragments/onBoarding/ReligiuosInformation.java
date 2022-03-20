@@ -22,9 +22,11 @@ import java.util.Locale;
 import java.util.Map;
 
 import keer.matrimony.CONSTANTS;
-import keer.matrimony.ui.MainActivity;
-import keer.matrimony.R;
+import keer.matrimony.database.userDatabaseHelper;
+import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.databinding.FragmentReligiuosInformationBinding;
+import keer.matrimony.ui.Activitys.MainActivity;
+import keer.matrimony.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -217,8 +219,9 @@ public class ReligiuosInformation extends Fragment {
                 map.put("zodiac" , ZodiacSign);
                 map.put("manglic" , ManglikType);
                 map.put("nakshtra" , Nakshatra);
-
-                ((MainActivity) getActivity()).setPersonalDetails(map , CONSTANTS.RELIGIOUS , 2);
+                userDatabaseHelper db = new userDatabaseHelper(getContext());
+                userDatabaseModel model = db .getUser(0);
+                ((MainActivity) getActivity()).setPersonalDetails(map , CONSTANTS.RELIGIOUS , model.getId());
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 ContactInformation c = new ContactInformation();
                 transaction.replace(R.id.ContainerMain , c);

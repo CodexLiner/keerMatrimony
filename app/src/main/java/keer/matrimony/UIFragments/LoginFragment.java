@@ -26,11 +26,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import keer.matrimony.CONSTANTS;
-import keer.matrimony.ui.HomeActivity;
+import keer.matrimony.databinding.FragmentLoginBinding;
+import keer.matrimony.ui.Activitys.HomeActivity;
 import keer.matrimony.R;
 import keer.matrimony.database.userDatabaseHelper;
 import keer.matrimony.database.userDatabaseModel;
-import keer.matrimony.databinding.FragmentLoginBinding;
 import keer.matrimony.models.data;
 import okhttp3.Call;
 import okhttp3.Callback;

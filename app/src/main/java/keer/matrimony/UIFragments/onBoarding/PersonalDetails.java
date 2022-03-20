@@ -18,9 +18,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import keer.matrimony.CONSTANTS;
-import keer.matrimony.ui.MainActivity;
-import keer.matrimony.R;
+import keer.matrimony.database.userDatabaseHelper;
+import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.databinding.FragmentPersonalDetailsBinding;
+import keer.matrimony.ui.Activitys.MainActivity;
+import keer.matrimony.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -219,7 +221,9 @@ public class PersonalDetails extends Fragment {
                 map.put("diet" , Diet);
                 map.put("disablity" , Disabilty);
                 map.put("blood_group" , bGroup);
-                ((MainActivity) getActivity()).setPersonalDetails(map , CONSTANTS.PERSONALDETAILS , 2);
+                userDatabaseHelper db = new userDatabaseHelper(getContext());
+                userDatabaseModel model = db .getUser(0);
+                ((MainActivity) getActivity()).setPersonalDetails(map , CONSTANTS.PERSONALDETAILS , model.getId());
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 ReligiuosInformation w = new ReligiuosInformation();
                 transaction.replace(R.id.ContainerMain , w);
