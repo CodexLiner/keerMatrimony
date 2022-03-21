@@ -17,7 +17,7 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
-import keer.matrimony.CONSTANTS;
+import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.database.userDatabaseHelper;
 import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.databinding.FragmentPersonalDetailsBinding;
@@ -32,9 +32,6 @@ import keer.matrimony.R;
 public class PersonalDetails extends Fragment {
     FragmentPersonalDetailsBinding binding;
     String Height , mStatus ,cStatus , Weight , dStatus  , Disabilty , bGroup , Diet;
-
-    String[] country = { "Height", "5.0 feet", "5.5 feet", "6.0 feet", "6.5 feet"};
-
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -71,13 +68,14 @@ public class PersonalDetails extends Fragment {
         binding = FragmentPersonalDetailsBinding.inflate(inflater);
         Weight = binding.weight.getText().toString();
 //        heightAdapter
-        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, country);
+        String[] heightArray = { "Height", "5.0 feet", "5.5 feet", "6.0 feet", "6.5 feet"};
+        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, heightArray);
         binding.height.setAdapter(heightAdapter);
         binding.height.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    Height = country[position];
+                    Height = heightArray[position];
                 }
             }
             @Override
@@ -106,7 +104,7 @@ public class PersonalDetails extends Fragment {
         });
 //        complexion status
         String[] complexion= {
-                "Complexion Status" , "Married" , "UnMarried" , "Divorced"
+                "Complexion Type" , "Extremely fair skin" , "Fair skin" , "Medium skin" , "Olive skin" , " Brown skin" , "Black skin"
         };
         ArrayAdapter<String> complexionAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, complexion);
         binding.complextion.setAdapter(complexionAdapter);
@@ -125,7 +123,7 @@ public class PersonalDetails extends Fragment {
         });
 //        diet status
         String[] diet= {
-                "Diet Status" , "Married" , "UnMarried" , "Divorced"
+                "Diet Status" , "vegetarians " , "non-vegetarians" , "Flexitarian "
         };
         ArrayAdapter<String> dietArray = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, diet);
         binding.diet.setAdapter(dietArray);

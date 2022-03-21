@@ -1,4 +1,4 @@
-package keer.matrimony;
+package keer.matrimony.other;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ public class CONSTANTS {
     public static final String BASEURLPROFILE = "https://jaikisankgn.org/matrimonial/public/profile/";
     public static final String PERSONALDETAILS = "update-personal-details/";
     public static final String EDUCATIONDETAILS = "update-contact-details/";
+    public static final String PARTNERPREF = "partner-preference/";
     public static final String RELIGIOUS = "update-religious-details/";
     public static final String CONTACTINFO = "update-contact-details";
     public static List<data> DATA ;

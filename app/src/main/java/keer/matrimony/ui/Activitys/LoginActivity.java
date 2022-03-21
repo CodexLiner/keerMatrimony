@@ -15,9 +15,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        userDatabaseHelper db = new userDatabaseHelper(this);
-        userDatabaseModel model = db .getUser(0);
-        Log.d("TAG", "onCreate: "+model.toString());
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .add(R.id.ContainerMain, LoginFragment.class, null)

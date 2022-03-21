@@ -14,11 +14,10 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
-import keer.matrimony.CONSTANTS;
+import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.database.userDatabaseHelper;
 import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.databinding.FragmentContactInformationBinding;
-import keer.matrimony.ui.Activitys.HomeActivity;
 import keer.matrimony.ui.Activitys.MainActivity;
 import keer.matrimony.R;
 
@@ -64,7 +63,7 @@ public class ContactInformation extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentContactInformationBinding.inflate(inflater);
-        ((HomeActivity) getActivity()).setActionBarTitle("Contact Details");
+        ((MainActivity) getActivity()).setActionBarTitle("Contact Details");
         final String[] fatherNumber = new String[1];
         final String[] whatsappNumber = new String[1];
         final String[] Pmadd = new String[1];

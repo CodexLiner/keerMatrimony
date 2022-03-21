@@ -1,5 +1,6 @@
 package keer.matrimony.Adapters;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,12 +26,19 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 
-import keer.matrimony.CONSTANTS;
+import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.R;
+import keer.matrimony.UIFragments.ProfileDetails;
 import keer.matrimony.models.data;
 
 public class ProfileListAdapters extends RecyclerView.Adapter<ProfileListAdapters.holder> {
     List<data> list;
+    Activity activity;
+
+    public ProfileListAdapters(List<data> list, Activity activity) {
+        this.list = list;
+        this.activity = activity;
+    }
 
     public ProfileListAdapters(List<data> list) {
         this.list = list;
@@ -43,7 +52,8 @@ public class ProfileListAdapters extends RecyclerView.Adapter<ProfileListAdapter
     }
 
     @Override
-    public void onBindViewHolder(@NonNull holder holder, int position) {
+    public void onBindViewHolder(@NonNull holder holder, int i) {
+        int position = i ;
         if (list.get(position).getFirst_name()!=null){
             String name = list.get(position).getFirst_name();
             if (list.get(position).getLast_name()!=null){
@@ -109,17 +119,23 @@ public class ProfileListAdapters extends RecyclerView.Adapter<ProfileListAdapter
         holder.ProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (activity==null){
+                    Navigation.findNavController(v).navigate(R.id.action_navigation_dashboard_to_navigationDetails2);
+                    CONSTANTS.DATAs = list.get(position);
+                }else {
+                ((FragmentActivity)v.getContext()).getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment_activity_home, new ProfileDetails( list.get(position) , activity)).addToBackStack("dashboard")
+                        .commit();
+                    CONSTANTS.DATAs = list.get(position);
+                }
 //                activity.getFragmentManager().beginTransaction().replace( R.id.navigation_home, new DashboardFragment()).commit();
-                Navigation.findNavController(v).navigate(R.id.action_navigation_dashboard_to_navigationDetails2);
-                CONSTANTS.DATAs = list.get(position);
+
 //                ((FragmentActivity)v.getContext()).getSupportFragmentManager()
 //                        .beginTransaction()
 //                        .replace(R.id.nav_host_fragment_activity_home, new ProfileDetails( list.get(position))).addToBackStack("dashboard")
 //                        .commit();
-              /*  ((HomeActivity) v.getContext()).getFragmentManager().beginTransaction()
-                        .replace( R.id.navigation_home, new DashboardFragment())
-                        .commit();*/
+              /*  ((HomeActivity) v.getContext()).getFragmentManager().beginTransaction().replace( R.id.navigation_home, new DashboardFragment()).commit();*/
             }
         });
     }

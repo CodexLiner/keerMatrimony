@@ -1,5 +1,6 @@
 package keer.matrimony.UIFragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,14 +12,16 @@ import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
 
-import keer.matrimony.CONSTANTS;
+import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.databinding.FragmentProfileDetailsBinding;
 import keer.matrimony.models.data;
 import keer.matrimony.ui.Activitys.HomeActivity;
+import keer.matrimony.ui.Activitys.SearchResult;
 
 public class ProfileDetails extends Fragment {
     @NonNull FragmentProfileDetailsBinding binding;
     data data;
+    Activity activity;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,8 +32,9 @@ public class ProfileDetails extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ProfileDetails(data data) {
+    public ProfileDetails(data data , Activity activity) {
        this.data = data;
+       this.activity = activity;
     }
 
     public ProfileDetails() {
@@ -60,8 +64,12 @@ public class ProfileDetails extends Fragment {
         data = CONSTANTS.DATAs;
         binding = FragmentProfileDetailsBinding.inflate(inflater);
         // Inflate the layout for this fragment
-        ((HomeActivity) getActivity()).setActionBarTitle(data.getFirst_name()+" "+data.getLast_name());
+       if (activity==null){
+           ((HomeActivity) getActivity()).setActionBarTitle(data.getFirst_name()+" "+data.getLast_name());
+       }else {
+           ((SearchResult) getActivity()).setActionBarTitle(data.getFirst_name()+" "+data.getLast_name());
 
+       }
         if (data.getDob()!=null){
             binding.dob.setText(data.getDob());
             binding.dob2.setText(data.getDob());

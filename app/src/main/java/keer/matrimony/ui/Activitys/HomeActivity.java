@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import keer.matrimony.CONSTANTS;
+import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.R;
 import keer.matrimony.databinding.ActivityHomeBinding;
 import keer.matrimony.models.data;

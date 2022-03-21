@@ -2,6 +2,7 @@ package keer.matrimony.ui.home;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -33,11 +34,14 @@ import java.util.List;
 
 import keer.matrimony.Adapters.ProfileListAdapters;
 
-import keer.matrimony.CONSTANTS;
+import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.R;
+import keer.matrimony.database.userDatabaseHelper;
+import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.databinding.FragmentHomeBinding;
 import keer.matrimony.models.data;
 import keer.matrimony.ui.Activitys.HomeActivity;
+import keer.matrimony.ui.Activitys.SearchResult;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -145,7 +149,11 @@ public class HomeFragment extends Fragment {
                     Toast.makeText(getContext(), "Please To Age", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                startSearch(getContext());
+                startSearch(getContext() , gender , fromDate , toDate ,
+                        "" , "" , "" ,
+                        "" , "" , "" ,
+                        "" ,"" , "" ,
+                        "" ,"" ,"");
 
             }
         });
@@ -153,12 +161,68 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    private void startSearch(Context context) {
+    private void startSearch(Context context ,
+                 String mGender , String minAge , String maxAge , String  subCast , String mStatus , String heightFrom , String heightTo ,
+                 String mManglic , String mCountry , String mState , String mCity , String mEdu , String mOcu , String mPro , String mInc) {
         Dialog dialog = new Dialog(context);
-        dialog.setTitle("hellow");
+        dialog.setTitle("Loading");
         dialog.setContentView(R.layout.dialog_layout);
         dialog.setCancelable(false);
         dialog.show();
+        String gender = "&gender="+mGender;
+        String min_age = "&min_age="+minAge;
+        String max_age = "&max_age="+maxAge;
+        String subcaste = "&subcaste="+subCast;
+        String maretial_status = "&maretial_status="+mStatus;
+        String height_from = "&height_from="+heightFrom;
+        String height_to = "&height_to="+heightTo;
+        String manglic = "&manglic="+mManglic;
+        String country = "&country="+mCountry;
+        String state = "&state="+mState;
+        String city = "&city="+mCity;
+        String education = "&education="+mEdu;
+        String occupation = "&occupation="+mOcu;
+        String profession = "&profession="+mPro;
+        String anu_income = "&anu_income="+mInc;
+        String url = CONSTANTS.BASEURL + "get-profiles/2?page=1"+gender+min_age+max_age+subcaste+maretial_status+height_from+height_to+manglic+country+state+city+education+occupation+profession+anu_income;
+        Gson gson = new Gson();
+        Request request = new Request.Builder().url(url).get().build();
+        new OkHttpClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                JSONObject jsonResponse = null;
+                try {
+                    jsonResponse = new JSONObject(response.body().string());
+                    if (jsonResponse.getBoolean("error")){
+                        JSONObject finalJsonResponse = jsonResponse;
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.dismiss();
+                                Toast.makeText(context, ""+ finalJsonResponse.optString("message"), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }else {
+                        Type type = new TypeToken<List<data>>(){}.getType();
+                        List<data> dataList = gson.fromJson(jsonResponse.getJSONObject("detail").optString("data"), type);
+                        startActivity(new Intent(getContext() , SearchResult.class));
+                        dialog.dismiss();
+                    }
+
+                } catch (JSONException e) {
+                    Log.d("TAG", "onResponse: "+e);
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        Log.d("TAG", "startSearch: "+url);
     }
 
     @Override
@@ -167,12 +231,14 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
     public void getProfiles(){
+        userDatabaseModel model;
+        userDatabaseHelper db = new userDatabaseHelper(getContext());
+        model = db.getUser(0);
         Gson gson = new Gson();
-        Request request = new Request.Builder().url(CONSTANTS.BASEURL +"get-profiles/2").addHeader("authorization" , "[]").get().build();
+        Request request = new Request.Builder().url(CONSTANTS.BASEURL +"get-profiles/"+model.getId()).addHeader("authorization" , "[]").get().build();
         new OkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.d("TAG", "getProfiles: f ");
                 Handler mHandler = new Handler(Looper.getMainLooper());
                 mHandler.post(new Runnable() {
                     @Override

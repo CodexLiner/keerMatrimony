@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import keer.matrimony.database.userDatabaseHelper;
+import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.databinding.FragmentNotificationsBinding;
 import keer.matrimony.ui.Activitys.HomeActivity;
 
@@ -26,6 +28,12 @@ public class NotificationsFragment extends Fragment {
 
 //        final TextView textView = binding.textNotifications;
 //        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        userDatabaseHelper db = new userDatabaseHelper(getContext());
+        userDatabaseModel model = db .getUser(0);
+        binding.dob.setText(model.getDob());
+        binding.dob2.setText(model.getDob());
+        binding.subcast.setText(model.getSubcaste());
+//        binding.motherTongue.setText(model.ge);
         return root;
     }
 

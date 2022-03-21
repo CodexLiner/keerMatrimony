@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import keer.matrimony.CONSTANTS;
+import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.database.userDatabaseHelper;
 import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.databinding.FragmentReligiuosInformationBinding;
@@ -95,6 +95,7 @@ public class ReligiuosInformation extends Fragment {
         binding.birthDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 new DatePickerDialog(getActivity(),startDate,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
@@ -160,7 +161,7 @@ public class ReligiuosInformation extends Fragment {
         });
 //        nakshatra Types
         String[] nakshatra= { "Nakshatra" ,
-                "Rohini", "Mrigashirsha", "Magha", "Uttara Phalguni", "Hasta", "Swat", "Anuradha", "Mula or Moola", "Uttara Ashadha", "Uttara Bhadrapada" , "Revati"
+                "Rohini", "Mrigashirsha", "Magha", "Uttara Phalguni", "Hasta", "Swat", "Anuradha", "Mula or Moola", "Uttara Ashadha", "Uttara Bhadrapada" , "Revati" , "i don't know"
         };
         ArrayAdapter<String> nAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, nakshatra);
         binding.nakshatra.setAdapter(nAdapter);

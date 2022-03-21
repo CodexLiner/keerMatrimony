@@ -19,12 +19,14 @@
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/drawable/ic_list.xml" value="0.1735" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/drawable/ic_person.xml" value="0.1735" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/drawable/ic_star.xml" value="0.1735" />
+        <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/drawable/ic_undraw_profile_data_re_v81r.xml" value="0.2135" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/drawable/oval_shape.xml" value="0.1735" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/drawable/shape_for_layout.xml" value="0.133" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/drawable/spinner_shape.xml" value="0.1735" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/layout/activity_home.xml" value="0.2359375" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/layout/activity_login.xml" value="0.176" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/layout/activity_search_result.xml" value="0.25" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/layout/dialog_layout.xml" value="0.25" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/layout/fragment_contact_information.xml" value="0.25" />
@@ -33,6 +35,7 @@
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/layout/fragment_login.xml" value="0.2" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/layout/fragment_notifications.xml" value="0.25" />
+        <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/layout/fragment_partner_prefrences.xml" value="0.25" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/layout/fragment_personal_details.xml" value="0.25" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/layout/fragment_profile_details.xml" value="0.25" />
         <entry key="..\:/Users/meena/AndroidStudioProjects/KeerMatrimony/app/src/main/res/layout/fragment_religiuos_information.xml" value="0.25" />

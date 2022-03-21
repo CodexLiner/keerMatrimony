@@ -17,7 +17,7 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
-import keer.matrimony.CONSTANTS;
+import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.database.userDatabaseHelper;
 import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.databinding.FragmentEducationDetailsBinding;

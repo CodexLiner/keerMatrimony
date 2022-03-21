@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import keer.matrimony.CONSTANTS;
+import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.databinding.FragmentLoginBinding;
 import keer.matrimony.ui.Activitys.HomeActivity;
 import keer.matrimony.R;
@@ -82,10 +82,6 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
       binding = FragmentLoginBinding.inflate(inflater);
-        userDatabaseHelper  db = new userDatabaseHelper(getContext());
-//        db.insertUser(userData);
-        userDatabaseModel model = db.getUser(0);
-        Log.d("TAG", "onCreateView: "+model);
       binding.signUpButton.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
@@ -154,7 +150,7 @@ public class LoginFragment extends Fragment {
                                 userDatabaseHelper  db = new userDatabaseHelper(getContext());
                                 Log.d("TAG", "insertUser: "+userData.toString());
                                 db.insertUser(userData);
-//                                userDatabaseModel model = db.getUser(0);
+                                userDatabaseModel model = db.getUser(0);
 //                                Log.d("TAG", "onResponse: "+model.toString());
                                 Toast.makeText(getActivity(), "Login Success", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getContext() , HomeActivity.class));

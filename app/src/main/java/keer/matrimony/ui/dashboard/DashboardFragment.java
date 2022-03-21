@@ -1,6 +1,7 @@
 package keer.matrimony.ui.dashboard;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -27,7 +28,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import keer.matrimony.Adapters.ProfileListAdapters;
-import keer.matrimony.CONSTANTS;
+import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.R;
 import keer.matrimony.databinding.FragmentDashboardBinding;
 import keer.matrimony.models.data;
@@ -39,6 +40,16 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class DashboardFragment extends Fragment {
+    List<data> list;
+    Activity activity;
+
+    public DashboardFragment() {
+    }
+
+    public DashboardFragment(List<data> list, Activity activity) {
+        this.list = list;
+        this.activity = activity;
+    }
 
     private FragmentDashboardBinding binding;
 
@@ -46,21 +57,33 @@ public class DashboardFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         DashboardViewModel dashboardViewModel =
                 new ViewModelProvider(this).get(DashboardViewModel.class);
-
-        ((HomeActivity) getActivity()).setActionBarTitle("Latest Profiles");
-        BottomNavigationView bm = getActivity().findViewById(R.id.nav_view);
-        bm.setSelectedItemId(R.id.navigation_dashboard);
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        binding.profileRec.setLayoutManager(new LinearLayoutManager(getContext() , RecyclerView.VERTICAL , false));
-        //   ProfileListAdapters adapters = new ProfileListAdapters(list);
-        if (CONSTANTS.DATA!=null){
-            ProfileListAdapters adapters = new ProfileListAdapters(CONSTANTS.DATA);
-            binding.profileRec.setAdapter(adapters);
+        if (activity==null){
+            ((HomeActivity) getActivity()).setActionBarTitle("Latest Profiles");
+            BottomNavigationView bm = getActivity().findViewById(R.id.nav_view);
+            bm.setSelectedItemId(R.id.navigation_dashboard);
+            binding.profileRec.setLayoutManager(new LinearLayoutManager(getContext() , RecyclerView.VERTICAL , false));
+            //   ProfileListAdapters adapters = new ProfileListAdapters(list);
+            if (CONSTANTS.DATA!=null){
+                ProfileListAdapters adapters = new ProfileListAdapters(CONSTANTS.DATA);
+                binding.profileRec.setAdapter(adapters);
+            }else {
+                getProfiles();
+            }
         }else {
-            getProfiles();
+
+
+            binding.profileRec.setLayoutManager(new LinearLayoutManager(getContext() , RecyclerView.VERTICAL , false));
+            //   ProfileListAdapters adapters = new ProfileListAdapters(list);
+            if (CONSTANTS.DATA!=null){
+                ProfileListAdapters adapters = new ProfileListAdapters(CONSTANTS.DATA , activity);
+                binding.profileRec.setAdapter(adapters);
+            }else {
+                getProfiles();
+            }
         }
-        return root;
+
+        return binding.getRoot();
     }
 
     @Override

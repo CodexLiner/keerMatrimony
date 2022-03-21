@@ -11,9 +11,8 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.Map;
 
-import keer.matrimony.CONSTANTS;
+import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.R;
-import keer.matrimony.UIFragments.onBoarding.EducationDetails;
 import keer.matrimony.UIFragments.onBoarding.PersonalDetails;
 import okhttp3.Call;
 import okhttp3.Callback;

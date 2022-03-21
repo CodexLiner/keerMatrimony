@@ -50,7 +50,7 @@
                 android:gravity="center|start"
                 android:textSize="18sp"
                 android:id="@+id/birthDate"
-                android:text="Date Of Birth"
+                android:text="Birth Time"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
@@ -64,7 +64,7 @@
                 android:hint="Place Of Birth"
                 android:background="@drawable/button_shape_secondary"
                 android:id="@+id/birthPlace"
-                android:inputType="number"
+                android:inputType="textAutoComplete"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>

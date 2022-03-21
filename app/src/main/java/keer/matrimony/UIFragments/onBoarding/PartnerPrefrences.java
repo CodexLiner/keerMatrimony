@@ -1,15 +1,24 @@
 package keer.matrimony.UIFragments.onBoarding;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import keer.matrimony.other.CONSTANTS;
+import keer.matrimony.database.userDatabaseHelper;
+import keer.matrimony.database.userDatabaseModel;
+import keer.matrimony.databinding.FragmentPartnerPrefrencesBinding;
+import keer.matrimony.ui.Activitys.HomeActivity;
 import keer.matrimony.ui.Activitys.MainActivity;
-import keer.matrimony.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +26,7 @@ import keer.matrimony.R;
  * create an instance of this fragment.
  */
 public class PartnerPrefrences extends Fragment {
+    FragmentPartnerPrefrencesBinding binding;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,6 +63,25 @@ public class PartnerPrefrences extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ((MainActivity) getActivity()).setActionBarTitle("Partner Preferences");
-        return inflater.inflate(R.layout.fragment_partner_prefrences, container, false);
+        binding = FragmentPartnerPrefrencesBinding.inflate(inflater);
+        binding.nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String partner = binding.partnerPref.getText().toString();
+                if (TextUtils.isEmpty(partner)){
+                    binding.partnerPref.setError("Required");
+                    return;
+                }
+                Map<String  , String> map = new HashMap<>();
+                map.put("partner_preference" , partner);
+                userDatabaseHelper db = new userDatabaseHelper(getContext());
+                userDatabaseModel model = db .getUser(0);
+                ((MainActivity) getActivity()).setPersonalDetails(map , CONSTANTS.PARTNERPREF , model.getId());
+                startActivity(new Intent(getContext() , HomeActivity.class));
+                getActivity().finishAffinity();
+            }
+        });
+
+        return binding.getRoot();
     }
 }

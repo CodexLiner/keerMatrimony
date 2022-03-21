@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import keer.matrimony.CONSTANTS;
+import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.R;
 import keer.matrimony.database.userDatabaseHelper;
 import keer.matrimony.database.userDatabaseModel;
