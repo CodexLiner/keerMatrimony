@@ -47,6 +47,7 @@ public class splash extends AppCompatActivity {
             public void run() {
 
                 if (model!=null){
+                    Log.d("TAG", "runUI: "+model.getId());
                     startActivity(new Intent(getApplicationContext() , HomeActivity.class));
                     overridePendingTransition(0,0);
                 }else {
