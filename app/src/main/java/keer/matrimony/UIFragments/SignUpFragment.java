@@ -396,11 +396,9 @@ public class SignUpFragment extends Fragment {
                             }else {
                                 data userData = gson.fromJson(jsonResponse.optString("details").toString() , data.class);
                                 userDatabaseHelper db = new userDatabaseHelper(getContext());
-                                Log.d("TAG", "insertUser: "+userData.toString());
                                 db.insertUser(userData);
                                 userDatabaseModel model = db.getUser(0);
-//                                Log.d("TAG", "onResponse: "+model.toString());
-                                ImageUpload imageUpload = new ImageUpload(file , 2);
+                                ImageUpload imageUpload = new ImageUpload(file , model.getId());
                                 imageUpload.execute();
                                 Toast.makeText(getActivity(), "Register SuccessFully", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getContext() , MainActivity.class));

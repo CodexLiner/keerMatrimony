@@ -29,7 +29,11 @@ public class ImageUpload extends AsyncTask<Void , Void , Void> {
         this.file = file;
         this.id = id;
     }
-//        final  RequestBody requestBody = new MultipartBody.Builder()
+
+    public ImageUpload() {
+    }
+
+    //        final  RequestBody requestBody = new MultipartBody.Builder()
 //                .setType(MultipartBody.FORM)
 //                .addFormDataPart("profile", System.currentTimeMillis()+".jpg", RequestBody.create(MediaType.parse("image/*"), file))
 //                .addFormDataPart("first_name" , map.get("first_name"))

@@ -14,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -32,6 +33,7 @@ import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.R;
 import keer.matrimony.databinding.ActivityHomeBinding;
 import keer.matrimony.models.data;
+import keer.matrimony.other.PermisionClass;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -50,7 +52,7 @@ public class HomeActivity extends AppCompatActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         ActionBar actionBar = getSupportActionBar();
-
+        PermissionCheck();
         // showing the back button in action bar
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -73,6 +75,17 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         onBackPressed();
         return false;
+    }
+    private void PermissionCheck() {
+        if (PermisionClass.hasPermision(HomeActivity.this , PermisionClass.permisions)){
+//            button2.setText("Enable Notification");
+
+        }else{
+            if (!PermisionClass.hasPermision(HomeActivity.this , PermisionClass.permisions)){
+                ActivityCompat.requestPermissions(HomeActivity.this, PermisionClass.permisions, 0);
+
+            }
+        }
     }
     public void getProfiles(){
         Log.d("TAG", "getProfiles: runn ");
