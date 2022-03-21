@@ -40,12 +40,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
 public class LoginFragment extends Fragment {
     FragmentLoginBinding binding;
     // TODO: Rename parameter arguments, choose names that match
@@ -151,7 +145,6 @@ public class LoginFragment extends Fragment {
                                 Log.d("TAG", "insertUser: "+userData.toString());
                                 db.insertUser(userData);
                                 userDatabaseModel model = db.getUser(0);
-//                                Log.d("TAG", "onResponse: "+model.toString());
                                 Toast.makeText(getActivity(), "Login Success", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getContext() , HomeActivity.class));
                                 getActivity().overridePendingTransition(0,0);
@@ -162,7 +155,6 @@ public class LoginFragment extends Fragment {
                     });
 
                 } catch (JSONException e) {
-                    Log.d("TAG", "onResponse: "+e);
                     e.printStackTrace();
                 }
 

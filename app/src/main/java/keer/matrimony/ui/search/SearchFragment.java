@@ -309,14 +309,11 @@ public class SearchFragment extends Fragment {
                     }
 
                 } catch (JSONException e) {
-                    Log.d("TAG", "onResponse: "+e);
                     e.printStackTrace();
                 }
 
             }
         });
-
-        Log.d("TAG", "startSearch: "+url);
     }
 
 }
