@@ -390,9 +390,8 @@ public class SignUpFragment extends Fragment {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            Log.d("TAG", "onResponse: "+jsonResponse.toString());
                             if (jsonResponse.optBoolean("error")){
-                                Toast.makeText(getActivity(), "Registration Failed ", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), jsonResponse.optString("message"), Toast.LENGTH_SHORT).show();
                             }else {
                                 data userData = gson.fromJson(jsonResponse.optString("details").toString() , data.class);
                                 userDatabaseHelper db = new userDatabaseHelper(getContext());
@@ -430,7 +429,7 @@ public class SignUpFragment extends Fragment {
                         @Override
                         public void run() {
                             outputUri = uri;
-//                            binding.selectImage.setImageURI(uri);
+                            binding.selectImage.setImageURI(uri);
                         }
                     });
 //                    Crop.of(uri, outputUri).asSquare().start(getActivity());

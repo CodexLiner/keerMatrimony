@@ -37,7 +37,8 @@ public class userDatabaseHelper extends SQLiteOpenHelper {
         }
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(userDatabaseModel.ID, 0);
+        values.put(userDatabaseModel.ID, data.getId());
+        values.put(userDatabaseModel.P_ID, 0);
         values.put(userDatabaseModel.CITY, data.getCity());
         values.put(userDatabaseModel.COUNTRY, data.getCountry());
         values.put(userDatabaseModel.COUNTRYCODE, data.getCountry_code());
@@ -63,7 +64,7 @@ public class userDatabaseHelper extends SQLiteOpenHelper {
     public void delete(int id)
     {
         String[] args={String.valueOf(id)};
-        int x  =getWritableDatabase().delete(userDatabaseModel.TABLE_NAME, "id=?", args);
+        int x  =getWritableDatabase().delete(userDatabaseModel.TABLE_NAME, "pid=?", args);
     }
     public userDatabaseModel getUser(long id) {
         // get readable database as we are not inserting anything
@@ -71,7 +72,7 @@ public class userDatabaseHelper extends SQLiteOpenHelper {
 
       try{
           Cursor cursor = db.rawQuery("select * from "
-                  +userDatabaseModel.TABLE_NAME+" where "+userDatabaseModel.ID+"=?" , new String[]
+                  +userDatabaseModel.TABLE_NAME+" where "+userDatabaseModel.P_ID+"=?" , new String[]
           {String.valueOf(id)});
 /*          Cursor cursor = db.query(userDatabaseModel.TABLE_NAME,
                   new String[]{

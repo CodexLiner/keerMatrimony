@@ -188,7 +188,7 @@ public class EducationDetails extends Fragment {
                 userDatabaseModel model = db .getUser(0);
                 ((MainActivity) getActivity()).setPersonalDetails(map , CONSTANTS.EDUCATIONDETAILS , model.getId());
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                PartnerPrefrences educationDetails = new PartnerPrefrences();
+                FamilyDetails educationDetails = new FamilyDetails();
                 transaction.replace(R.id.ContainerMain , educationDetails);
                 transaction.addToBackStack(null);
                 transaction.commit();

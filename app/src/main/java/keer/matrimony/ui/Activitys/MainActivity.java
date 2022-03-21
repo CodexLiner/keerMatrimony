@@ -8,9 +8,13 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.Map;
 
+import keer.matrimony.UIFragments.onBoarding.FamilyDetails;
 import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.R;
 import keer.matrimony.UIFragments.onBoarding.PersonalDetails;
@@ -52,7 +56,12 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                Log.d("TAG", "onResponseX: "+response.code());
+                try {
+                    JSONObject jsonResponse = new JSONObject(response.body().string());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 

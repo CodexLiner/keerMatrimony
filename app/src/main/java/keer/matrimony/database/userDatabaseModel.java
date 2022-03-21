@@ -4,6 +4,7 @@ public class userDatabaseModel {
     public static final String TABLE_NAME = "USER";
 
     public static final String ID = "id";
+    public static final String P_ID = "pid";
     public static final String NAME = "name";
     public static final String LAST = "last_name";
     public static final String EMAIL = "email";
@@ -22,6 +23,7 @@ public class userDatabaseModel {
             CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + "("
                     + ID + " INTEGER,"
+                    + P_ID + " INTEGER,"
                     + NAME + " TEXT,"
                     + LAST + " TEXT,"
                     + EMAIL + " TEXT,"
