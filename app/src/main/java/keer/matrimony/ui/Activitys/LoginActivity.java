@@ -26,14 +26,8 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     private void PermissionCheck() {
-        if (PermisionClass.hasPermision(LoginActivity.this , PermisionClass.permisions)){
-//            button2.setText("Enable Notification");
-
-        }else{
-            if (!PermisionClass.hasPermision(LoginActivity.this , PermisionClass.permisions)){
-                ActivityCompat.requestPermissions(LoginActivity.this, PermisionClass.permisions, 0);
-
-            }
+        if (!PermisionClass.hasPermision(LoginActivity.this , PermisionClass.permisions)){
+            ActivityCompat.requestPermissions(LoginActivity.this, PermisionClass.permisions, 0);
         }
     }
 }

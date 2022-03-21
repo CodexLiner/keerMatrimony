@@ -102,7 +102,6 @@ public class DashboardFragment extends Fragment {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d("TAG", "onResponse: failed ");
                     }
                 });
             }

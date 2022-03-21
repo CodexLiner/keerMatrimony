@@ -79,12 +79,8 @@ public class HomeActivity extends AppCompatActivity {
         return false;
     }
     private void PermissionCheck() {
-        if (PermisionClass.hasPermision(HomeActivity.this , PermisionClass.permisions)){
-
-        }else{
-            if (!PermisionClass.hasPermision(HomeActivity.this , PermisionClass.permisions)){
-                ActivityCompat.requestPermissions(HomeActivity.this, PermisionClass.permisions, 0);
-            }
+        if (!PermisionClass.hasPermision(HomeActivity.this , PermisionClass.permisions)){
+            ActivityCompat.requestPermissions(HomeActivity.this, PermisionClass.permisions, 0);
         }
     }
     public void getProfiles(){

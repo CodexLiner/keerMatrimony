@@ -192,7 +192,6 @@ public class HomeFragment extends Fragment {
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
 
             }
-
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 JSONObject jsonResponse = null;
@@ -215,14 +214,10 @@ public class HomeFragment extends Fragment {
                     }
 
                 } catch (JSONException e) {
-                    Log.d("TAG", "onResponse: "+e);
                     e.printStackTrace();
                 }
-
             }
         });
-
-        Log.d("TAG", "startSearch: "+url);
     }
 
     @Override
