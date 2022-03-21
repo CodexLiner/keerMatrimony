@@ -60,11 +60,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SignUpFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SignUpFragment extends Fragment {
     FragmentSignUpBinding binding;
     String mState , mCountry , mSubcast, mGender ,mBirth , first , last , email , mobile , dob , password;
@@ -82,16 +77,6 @@ public class SignUpFragment extends Fragment {
     public SignUpFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SignUpFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static SignUpFragment newInstance(String param1, String param2) {
         SignUpFragment fragment = new SignUpFragment();
         Bundle args = new Bundle();
@@ -350,7 +335,6 @@ public class SignUpFragment extends Fragment {
         File file = new File(getActivity().getExternalCacheDir(), "keerProfile.jpg");
         try {
             boolean f = file.createNewFile();
-            Log.d("TAG", "Register: "+file.getPath());
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             bm.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
             byte[] bitmapdata = bos.toByteArray();
@@ -359,14 +343,13 @@ public class SignUpFragment extends Fragment {
             fos.flush();
             fos.close();
         }catch (Exception e){
-            Log.d("TAG", "Register: "+e);
+           e.printStackTrace();
         }
         if (map==null){
             return;
         }
         String jsonString = gson.toJson(map);
-          final RequestBody requestBody2 = RequestBody.create(jsonString , MediaType.get(CONSTANTS.mediaType));
-       //  final RequestBody requestBody2 = RequestBody.create(jsonString , MediaType.get(CONSTANTS.mediaType));
+        final RequestBody requestBody2 = RequestBody.create(jsonString , MediaType.get(CONSTANTS.mediaType));
         Request request = new Request.Builder().url(CONSTANTS.BASEURL +"register").addHeader("authorization" , "[]").post(requestBody2).build();
         new OkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
@@ -375,7 +358,6 @@ public class SignUpFragment extends Fragment {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d("TAG", "onResponse: "+e);
                         Toast.makeText(getActivity(), "Login Failed", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -384,7 +366,6 @@ public class SignUpFragment extends Fragment {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
 
                 try {
-                    Log.d("TAG", "onResponse: "+response.message().toString());
                     JSONObject jsonResponse = new JSONObject(response.body().string());
                     Handler mHandler = new Handler(Looper.getMainLooper());
                     mHandler.post(new Runnable() {
@@ -402,14 +383,11 @@ public class SignUpFragment extends Fragment {
                                 Toast.makeText(getActivity(), "Register SuccessFully", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getContext() , MainActivity.class));
                                 getActivity().overridePendingTransition(0,0);
-
                             }
-
                         }
                     });
 
                 } catch (JSONException e) {
-                    Log.d("TAG", "onResponse: exception "+e);
                     e.printStackTrace();
                 }
 

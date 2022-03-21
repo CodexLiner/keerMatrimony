@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import keer.matrimony.database.userDatabaseHelper;
+import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.R;
 import keer.matrimony.databinding.ActivityHomeBinding;
@@ -78,24 +80,22 @@ public class HomeActivity extends AppCompatActivity {
     }
     private void PermissionCheck() {
         if (PermisionClass.hasPermision(HomeActivity.this , PermisionClass.permisions)){
-//            button2.setText("Enable Notification");
 
         }else{
             if (!PermisionClass.hasPermision(HomeActivity.this , PermisionClass.permisions)){
                 ActivityCompat.requestPermissions(HomeActivity.this, PermisionClass.permisions, 0);
-
             }
         }
     }
     public void getProfiles(){
-        Log.d("TAG", "getProfiles: runn ");
         Gson gson = new Gson();
+        userDatabaseHelper db = new userDatabaseHelper(this);
+        userDatabaseModel model = db.getUser(0);
 //        final RequestBody requestBody = RequestBody.create(jsonString , MediaType.get(CONSTANTS.mediaType));
-        Request request = new Request.Builder().url(CONSTANTS.BASEURL +"get-profiles/2").addHeader("authorization" , "[]").get().build();
+        Request request = new Request.Builder().url(CONSTANTS.BASEURL +"get-profiles/"+model.getId()).addHeader("authorization" , "[]").get().build();
         new OkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.d("TAG", "getProfiles: f ");
                 Handler mHandler = new Handler(Looper.getMainLooper());
                 mHandler.post(new Runnable() {
                     @Override
@@ -127,17 +127,14 @@ public class HomeActivity extends AppCompatActivity {
     public void onBackPressed(){
         FragmentManager fm = getFragmentManager();
         if (fm.getBackStackEntryCount() > 0) {
-            Log.i("MainActivity", "popping backstack");
             fm.popBackStack();
         } else {
-            Log.i("MainActivity", "nothing on backstack, calling super");
             super.onBackPressed();
         }
     }
     public void removeFragment(Fragment fragment){
         androidx.fragment.app.FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
         fragmentTransaction.remove(fragment);
         fragmentTransaction.commit();
     }

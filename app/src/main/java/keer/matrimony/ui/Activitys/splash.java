@@ -47,7 +47,6 @@ public class splash extends AppCompatActivity {
             public void run() {
 
                 if (model!=null){
-                    Log.d("TAG", "runUI: "+model.getId());
                     startActivity(new Intent(getApplicationContext() , HomeActivity.class));
                     overridePendingTransition(0,0);
                 }else {
@@ -59,9 +58,7 @@ public class splash extends AppCompatActivity {
         },2000);
     }
     public void getProfiles(){
-        Log.d("TAG", "getProfiles: runn ");
         Gson gson = new Gson();
-//        final RequestBody requestBody = RequestBody.create(jsonString , MediaType.get(CONSTANTS.mediaType));
         Request request = new Request.Builder().url(CONSTANTS.BASEURL +"get-profiles/2").addHeader("authorization" , "[]").get().build();
         new OkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
@@ -75,7 +72,6 @@ public class splash extends AppCompatActivity {
                     }
                 });
             }
-
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
 
@@ -84,7 +80,6 @@ public class splash extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(response.body().string());
                     Type type = new TypeToken<List<data>>(){}.getType();
                     CONSTANTS.DATA = gson.fromJson(jsonResponse.getJSONObject("detail").optString("data"), type);
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

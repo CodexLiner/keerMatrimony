@@ -22,11 +22,6 @@ import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.ui.Activitys.MainActivity;
 import keer.matrimony.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FamilyDetails#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FamilyDetails extends Fragment {
     FragmentFamilyDetailsBinding binding;
 

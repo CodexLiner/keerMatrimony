@@ -24,11 +24,6 @@ import keer.matrimony.databinding.FragmentPersonalDetailsBinding;
 import keer.matrimony.ui.Activitys.MainActivity;
 import keer.matrimony.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PersonalDetails#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class PersonalDetails extends Fragment {
     FragmentPersonalDetailsBinding binding;
     String Height , mStatus ,cStatus , Weight , dStatus  , Disabilty , bGroup , Diet;
