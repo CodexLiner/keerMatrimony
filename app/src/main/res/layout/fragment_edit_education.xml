@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UIFragments.onBoarding.ReligiuosInformation">
-
+    tools:context=".UIFragments.onBoarding.PersonalDetails">
     <LinearLayout
         android:padding="5dp"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <LinearLayout
-            android:visibility="gone"
+            android:background="@drawable/button_shape_secondary"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_height="50dp">
+            <Spinner
+                android:id="@+id/Education"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+        <LinearLayout
             android:background="@drawable/button_shape_secondary"
             android:layout_width="match_parent"
             android:layout_marginBottom="5dp"
             android:layout_height="50dp">
             <EditText
-                android:background="@drawable/button_shape_secondary"
                 android:paddingStart="10dp"
-                android:hint="GOTRA"
-                android:id="@+id/gotra"
+                android:background="@drawable/button_shape_secondary"
+                android:hint="Education Details"
+                android:id="@+id/educationDetails"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
@@ -36,7 +42,7 @@
             android:layout_marginBottom="5dp"
             android:layout_height="50dp">
             <Spinner
-                android:id="@+id/motherTongue"
+                android:id="@+id/occupation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
@@ -45,13 +51,22 @@
             android:layout_width="match_parent"
             android:layout_marginBottom="5dp"
             android:layout_height="50dp">
-            <TextView
+            <Spinner
+                android:id="@+id/profession"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+        <LinearLayout
+            android:background="@drawable/button_shape_secondary"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_height="50dp">
+            <EditText
                 android:paddingStart="10dp"
-                android:layout_gravity="center"
-                android:gravity="center|start"
-                android:textSize="18sp"
-                android:id="@+id/birthDate"
-                android:text="Birth Time"
+                android:hint="Profession"
+                android:background="@drawable/button_shape_secondary"
+                android:id="@+id/occupationDetails"
+                android:inputType="textAutoComplete"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
@@ -60,50 +75,12 @@
             android:layout_width="match_parent"
             android:layout_marginBottom="5dp"
             android:layout_height="50dp">
+            <Spinner
+                android:id="@+id/annualIncome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
 
-            <TextView
-                android:layout_gravity="center"
-                android:gravity="center|start"
-                android:id="@+id/birthPlace"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_shape_secondary"
-                android:hint="@string/place_of_birth"
-                android:paddingStart="10dp"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                tools:ignore="RtlSymmetry" />
-        </LinearLayout>
-        <LinearLayout
-            android:background="@drawable/button_shape_secondary"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_height="50dp">
-            <Spinner
-                android:id="@+id/zodiac"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-        <LinearLayout
-            android:background="@drawable/button_shape_secondary"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_height="50dp">
-            <Spinner
-                android:id="@+id/manglik"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-        <LinearLayout
-            android:background="@drawable/button_shape_secondary"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_height="50dp">
-            <Spinner
-                android:id="@+id/nakshatra"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
         <LinearLayout
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
@@ -119,4 +96,4 @@
 
     </LinearLayout>
 
-</ScrollView>
+</FrameLayout>

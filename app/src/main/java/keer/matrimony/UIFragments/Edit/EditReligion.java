@@ -1,4 +1,4 @@
-package keer.matrimony.UIFragments.onBoarding;
+package keer.matrimony.UIFragments.Edit;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -23,20 +23,23 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import keer.matrimony.other.CONSTANTS;
+import keer.matrimony.R;
+import keer.matrimony.UIFragments.onBoarding.ContactInformation;
 import keer.matrimony.database.userDatabaseHelper;
 import keer.matrimony.database.userDatabaseModel;
+import keer.matrimony.databinding.FragmentEditReligionBinding;
 import keer.matrimony.databinding.FragmentReligiuosInformationBinding;
+import keer.matrimony.other.CONSTANTS;
+import keer.matrimony.ui.Activitys.HomeActivity;
 import keer.matrimony.ui.Activitys.MainActivity;
-import keer.matrimony.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ReligiuosInformation#newInstance} factory method to
+ * Use the {@link EditReligion#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ReligiuosInformation extends Fragment {
-    FragmentReligiuosInformationBinding binding;
+public class EditReligion extends Fragment {
+    FragmentEditReligionBinding binding;
     Calendar myCalendar =Calendar.getInstance();
     SimpleDateFormat simpleDateFormat ;
     String Gotra , mTongue  , DOB , POB , ZodiacSign , ManglikType , Nakshatra ;
@@ -49,12 +52,21 @@ public class ReligiuosInformation extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ReligiuosInformation() {
+    public EditReligion() {
         // Required empty public constructor
     }
 
-    public static ReligiuosInformation newInstance(String param1, String param2) {
-        ReligiuosInformation fragment = new ReligiuosInformation();
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment EditReligion.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static EditReligion newInstance(String param1, String param2) {
+        EditReligion fragment = new EditReligion();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -74,8 +86,9 @@ public class ReligiuosInformation extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ((MainActivity) getActivity()).setActionBarTitle("Religious Details");
-        binding = FragmentReligiuosInformationBinding.inflate(inflater);
+        // Inflate the layout for this fragment
+        ((HomeActivity) getActivity()).setActionBarTitle("Edit Religion Details");
+        binding = FragmentEditReligionBinding.inflate(inflater);
 //        date of birth picker
         Gotra = binding.gotra.getText().toString();
         POB = binding.birthPlace.getText().toString();
@@ -195,13 +208,8 @@ public class ReligiuosInformation extends Fragment {
         binding.nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Gotra = binding.gotra.getText().toString();
                 POB = binding.birthPlace.getText().toString();
                 DOB = binding.birthDate.getText().toString();
-//                if (TextUtils.isEmpty(Gotra)){
-//                    Toast.makeText(getActivity(), "Select Gotra", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
                 if (TextUtils.isEmpty(mTongue)){
                     Toast.makeText(getActivity(), "Select Mother Tongue", Toast.LENGTH_SHORT).show();
                     return;
@@ -226,6 +234,7 @@ public class ReligiuosInformation extends Fragment {
                     Toast.makeText(getActivity(), "Select Nakshatra", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 Map<String , String> map = new HashMap<>();
                 map.put("mother_tongue" , mTongue);
                 map.put("birth_time" , DOB);
@@ -235,12 +244,14 @@ public class ReligiuosInformation extends Fragment {
                 map.put("nakshtra" , Nakshatra);
                 userDatabaseHelper db = new userDatabaseHelper(getContext());
                 userDatabaseModel model = db .getUser(0);
-                ((MainActivity) getActivity()).setPersonalDetails(map , CONSTANTS.RELIGIOUS , model.getId());
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                ContactInformation c = new ContactInformation();
-                transaction.replace(R.id.ContainerMain , c);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                ((HomeActivity) getActivity()).setPersonalDetails(map , CONSTANTS.RELIGIOUS , model.getId());
+                getActivity().onBackPressed();
+                Toast.makeText(getActivity(), "Details Updated Successfully", Toast.LENGTH_SHORT).show();
+//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//                ContactInformation c = new ContactInformation();
+//                transaction.replace(R.id.ContainerMain , c);
+//                transaction.addToBackStack(null);
+//                transaction.commit();
             }
         });
         return binding.getRoot();

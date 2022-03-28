@@ -38,9 +38,11 @@ public class splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        getProfiles();
         userDatabaseHelper db = new userDatabaseHelper(this);
         userDatabaseModel model = db.getUser(0);
+        if (model!=null){
+            getProfiles();
+        }
 
         new Timer().schedule(new TimerTask() {
             @Override
@@ -59,7 +61,9 @@ public class splash extends AppCompatActivity {
     }
     public void getProfiles(){
         Gson gson = new Gson();
-        Request request = new Request.Builder().url(CONSTANTS.BASEURL +"get-profiles/2").addHeader("authorization" , "[]").get().build();
+        userDatabaseHelper db = new userDatabaseHelper(getApplicationContext());
+        userDatabaseModel model = db.getUser(0);
+        Request request = new Request.Builder().url(CONSTANTS.BASEURL +"get-profiles/"+model.getId()).addHeader("authorization" , "[]").get().build();
         new OkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {

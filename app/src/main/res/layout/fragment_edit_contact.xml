@@ -1,86 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UIFragments.onBoarding.ReligiuosInformation">
-
+    tools:context=".UIFragments.onBoarding.PersonalDetails">
     <LinearLayout
         android:padding="5dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <ImageView
+            android:layout_marginBottom="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_profile_data"/>
         <LinearLayout
-            android:visibility="gone"
             android:background="@drawable/button_shape_secondary"
             android:layout_width="match_parent"
             android:layout_marginBottom="5dp"
             android:layout_height="50dp">
             <EditText
+                android:inputType="number"
+                android:paddingStart="10dp"
                 android:background="@drawable/button_shape_secondary"
-                android:paddingStart="10dp"
-                android:hint="GOTRA"
-                android:id="@+id/gotra"
+                android:hint="Father Contact Number"
+                android:id="@+id/father"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
-        <LinearLayout
-            android:background="@drawable/button_shape_secondary"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_height="50dp">
-            <Spinner
-                android:id="@+id/motherTongue"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-        <LinearLayout
-            android:background="@drawable/button_shape_secondary"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_height="50dp">
-            <TextView
-                android:paddingStart="10dp"
-                android:layout_gravity="center"
-                android:gravity="center|start"
-                android:textSize="18sp"
-                android:id="@+id/birthDate"
-                android:text="Birth Time"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-        <LinearLayout
-            android:background="@drawable/button_shape_secondary"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_height="50dp">
 
-            <TextView
-                android:layout_gravity="center"
-                android:gravity="center|start"
-                android:id="@+id/birthPlace"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_shape_secondary"
-                android:hint="@string/place_of_birth"
+        <LinearLayout
+            android:background="@drawable/button_shape_secondary"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_height="50dp">
+            <EditText
                 android:paddingStart="10dp"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                tools:ignore="RtlSymmetry" />
-        </LinearLayout>
-        <LinearLayout
-            android:background="@drawable/button_shape_secondary"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_height="50dp">
-            <Spinner
-                android:id="@+id/zodiac"
+                android:hint="Whatsapp Number"
+                android:background="@drawable/button_shape_secondary"
+                android:id="@+id/whatsapp"
+                android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
@@ -89,8 +51,12 @@
             android:layout_width="match_parent"
             android:layout_marginBottom="5dp"
             android:layout_height="50dp">
-            <Spinner
-                android:id="@+id/manglik"
+            <EditText
+                android:paddingStart="10dp"
+                android:hint="Present Adddress"
+                android:background="@drawable/button_shape_secondary"
+                android:id="@+id/PresentAddress"
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
@@ -99,11 +65,16 @@
             android:layout_width="match_parent"
             android:layout_marginBottom="5dp"
             android:layout_height="50dp">
-            <Spinner
-                android:id="@+id/nakshatra"
+            <EditText
+                android:paddingStart="10dp"
+                android:hint="Permanent Address"
+                android:background="@drawable/button_shape_secondary"
+                android:id="@+id/PermanentAddress"
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
+
         <LinearLayout
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
@@ -119,4 +90,4 @@
 
     </LinearLayout>
 
-</ScrollView>
+</FrameLayout>

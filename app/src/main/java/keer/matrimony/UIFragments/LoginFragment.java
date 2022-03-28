@@ -1,5 +1,6 @@
 package keer.matrimony.UIFragments;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,11 +10,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -22,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -91,7 +95,6 @@ public class LoginFragment extends Fragment {
           public void onClick(View v) {
               String email = binding.userEmail.getText().toString().trim();
               String pass = binding.userPassword.getText().toString().trim();
-
               if (TextUtils.isEmpty(email)){
                   binding.userEmail.setError("Required");
                   return;

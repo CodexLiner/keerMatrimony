@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 
 import keer.matrimony.database.userDatabaseHelper;
 import keer.matrimony.database.userDatabaseModel;
@@ -38,8 +39,10 @@ import keer.matrimony.models.data;
 import keer.matrimony.other.PermisionClass;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class HomeActivity extends AppCompatActivity {
@@ -117,6 +120,27 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+    }
+    public void setPersonalDetails(Map<String, String> map , String endPoint , int ID) {
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(map);
+        final RequestBody requestBody = RequestBody.create(jsonString , MediaType.get(CONSTANTS.mediaType));
+        Request request = new Request.Builder().url(CONSTANTS.BASEURL +endPoint+ID).addHeader("authorization" , "[]").post(requestBody).build();
+        new OkHttpClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+            }
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response.body().string());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
     }
 
     @Override

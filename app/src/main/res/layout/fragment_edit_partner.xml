@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UIFragments.onBoarding.PartnerPrefrences">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/ic_partner"/>
+        <LinearLayout
+            android:layout_weight="1"
+            android:id="@+id/userDetails"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/shape_for_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:padding="0dp"
+                android:layout_gravity="top|center"
+                android:gravity="start"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidth="0.5dp"
+                app:boxStrokeWidthFocused="0.5dp"
+                app:hintTextColor="@color/black"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Partner Preferences">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/partnerPref"
+                    android:layout_width="match_parent"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:maxLines ="4"
+                    android:maxLength ="2000"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="2dp"
+                    android:drawablePadding="0dp"
+                    android:gravity="center|start" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/nextButton"
+                android:background="@drawable/button_shape"
+                android:text="Save Preference"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

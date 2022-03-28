@@ -6,4 +6,5 @@
     <string name="title_home">Home </string>
     <string name="title_dashboard">List</string>
     <string name="title_notifications">Profile</string>
+    <string name="place_of_birth">Place Of Birth</string>
 </resources>
