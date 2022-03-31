@@ -75,4 +75,17 @@ public class religious_details {
     public void setNakshtra(String nakshtra) {
         this.nakshtra = nakshtra;
     }
+
+    @Override
+    public String toString() {
+        return "religious_details{" +
+                "gotra='" + gotra + '\'' +
+                ", mother_tongue='" + mother_tongue + '\'' +
+                ", birth_time='" + birth_time + '\'' +
+                ", birth_place='" + birth_place + '\'' +
+                ", zodiac='" + zodiac + '\'' +
+                ", manglic='" + manglic + '\'' +
+                ", nakshtra='" + nakshtra + '\'' +
+                '}';
+    }
 }

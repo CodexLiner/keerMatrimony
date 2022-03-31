@@ -60,6 +60,7 @@ public class splash extends AppCompatActivity {
         },2000);
     }
     public void getProfiles(){
+        Log.d("TAG", "getProfiles: splash");
         Gson gson = new Gson();
         userDatabaseHelper db = new userDatabaseHelper(getApplicationContext());
         userDatabaseModel model = db.getUser(0);
@@ -67,7 +68,6 @@ public class splash extends AppCompatActivity {
         new OkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.d("TAG", "getProfiles: f ");
                 Handler mHandler = new Handler(Looper.getMainLooper());
                 mHandler.post(new Runnable() {
                     @Override

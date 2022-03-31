@@ -304,6 +304,7 @@ public class SearchFragment extends Fragment {
                     }else {
                         Type type = new TypeToken<List<data>>(){}.getType();
                         List<data> dataList = gson.fromJson(jsonResponse.getJSONObject("detail").optString("data"), type);
+                        CONSTANTS.SEARCHRESULT = dataList;
                         startActivity(new Intent(getContext() , SearchResult.class));
                         dialog.dismiss();
                     }

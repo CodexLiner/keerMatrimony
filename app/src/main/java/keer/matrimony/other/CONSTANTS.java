@@ -3,6 +3,8 @@ package keer.matrimony.other;
 import java.util.List;
 
 import keer.matrimony.models.data;
+import keer.matrimony.models.personal_details;
+import keer.matrimony.models.religious_details;
 
 public class CONSTANTS {
     public static final String BASEURL = "https://jaikisankgn.org/matrimonial/api/";
@@ -13,6 +15,9 @@ public class CONSTANTS {
     public static final String RELIGIOUS = "update-religious-details/";
     public static final String CONTACTINFO = "update-contact-details/";
     public static final String FAMILYDETAILS = "update-family-details/";
+    public static  religious_details RELIGIOUSDETAIL;
+    public static  personal_details PERSONALDETAIL ;
+    public static List<data> SEARCHRESULT ;
     public static List<data> DATA ;
     public static data DATAs ;
     public static String mediaType = "application/json; charset=utf-8";

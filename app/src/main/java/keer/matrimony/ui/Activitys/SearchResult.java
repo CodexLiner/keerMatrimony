@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import keer.matrimony.R;
 import keer.matrimony.databinding.ActivitySearchResultBinding;
+import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.ui.dashboard.DashboardFragment;
 
 public class SearchResult extends AppCompatActivity {
@@ -16,11 +18,11 @@ public class SearchResult extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySearchResultBinding.inflate(getLayoutInflater());
-        ActionBar actionBar = getSupportActionBar();
+         binding = ActivitySearchResultBinding.inflate(getLayoutInflater());
+         ActionBar actionBar = getSupportActionBar();
          getSupportFragmentManager()
         .beginTransaction()
-        .replace(R.id.nav_host_fragment_activity_home, new DashboardFragment(null , this))
+        .replace(R.id.nav_host_fragment_activity_home, new DashboardFragment(CONSTANTS.SEARCHRESULT, this))
         .commit();
 
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -40,4 +42,15 @@ public class SearchResult extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setActionBarTitle("Search Result's");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        CONSTANTS.SEARCHRESULT = null;
+    }
 }

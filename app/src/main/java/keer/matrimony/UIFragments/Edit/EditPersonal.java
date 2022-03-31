@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -193,6 +194,37 @@ public class EditPersonal extends Fragment {
 
             }
         });
+//        Pre Filled data function
+        if (CONSTANTS.PERSONALDETAIL!=null){
+            if (CONSTANTS.PERSONALDETAIL.getWeight()!=null){
+                binding.weight.setText(CONSTANTS.PERSONALDETAIL.getWeight());
+            }
+            for (int i = 0; i < heightArray.length; i++) {
+                if (CONSTANTS.PERSONALDETAIL.getHeight()!=null && CONSTANTS.PERSONALDETAIL.getHeight().equals(heightArray[i])){
+                    binding.height.setSelection(i);
+                }
+            }
+            for (int i = 0; i < maritalStatus.length; i++) {
+                if (CONSTANTS.PERSONALDETAIL.getMaretial_status()!=null && CONSTANTS.PERSONALDETAIL.getMaretial_status().equals(maritalStatus[i])){
+                    binding.maritalStatus.setSelection(i);
+                }
+            }
+            for (int i = 0; i < complexion.length; i++) {
+                if (CONSTANTS.PERSONALDETAIL.getComplexion()!=null && CONSTANTS.PERSONALDETAIL.getComplexion().equals(complexion[i])){
+                    binding.complextion.setSelection(i);
+                }
+            }
+            for (int i = 0; i < disAbility.length; i++) {
+                if (CONSTANTS.PERSONALDETAIL.getDisablity()!=null && CONSTANTS.PERSONALDETAIL.getDisablity().equals(disAbility[i])){
+                    binding.disAbility.setSelection(i);
+                }
+            }
+            for (int i = 0; i < bloodGroup.length; i++) {
+                if (CONSTANTS.PERSONALDETAIL.getBlood_group()!=null && CONSTANTS.PERSONALDETAIL.getBlood_group().equals(bloodGroup[i])){
+                    binding.bloodGroup.setSelection(i);
+                }
+            }
+        }
         binding.nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

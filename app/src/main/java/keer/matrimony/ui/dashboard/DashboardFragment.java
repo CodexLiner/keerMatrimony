@@ -72,14 +72,13 @@ public class DashboardFragment extends Fragment {
             }
         }else {
 
-
             binding.profileRec.setLayoutManager(new LinearLayoutManager(getContext() , RecyclerView.VERTICAL , false));
             //   ProfileListAdapters adapters = new ProfileListAdapters(list);
-            if (CONSTANTS.DATA!=null){
-                ProfileListAdapters adapters = new ProfileListAdapters(CONSTANTS.DATA , activity);
+            if (CONSTANTS.SEARCHRESULT!=null){
+                ProfileListAdapters adapters = new ProfileListAdapters(CONSTANTS.SEARCHRESULT , activity);
                 binding.profileRec.setAdapter(adapters);
             }else {
-                getProfiles();
+//                getProfiles();
             }
         }
 

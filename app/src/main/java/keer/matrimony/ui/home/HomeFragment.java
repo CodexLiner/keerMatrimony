@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -68,8 +69,6 @@ public class HomeFragment extends Fragment {
         }else {
             getProfiles();
         }
-
-        Log.d("TAG", "onCreateView: recview ");
 //        spinner
         String[] state= {
                 "Select Gender" , "Male" , "Female"
@@ -208,7 +207,7 @@ public class HomeFragment extends Fragment {
                         });
                     }else {
                         Type type = new TypeToken<List<data>>(){}.getType();
-                        List<data> dataList = gson.fromJson(jsonResponse.getJSONObject("detail").optString("data"), type);
+                        CONSTANTS.SEARCHRESULT = gson.fromJson(jsonResponse.getJSONObject("detail").optString("data"), type);
                         startActivity(new Intent(getContext() , SearchResult.class));
                         dialog.dismiss();
                     }
@@ -259,8 +258,6 @@ public class HomeFragment extends Fragment {
                             binding.profileRec.setAdapter(adapter);
                         }
                     });
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

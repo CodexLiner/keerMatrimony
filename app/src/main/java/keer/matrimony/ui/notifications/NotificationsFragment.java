@@ -45,7 +45,8 @@ import okhttp3.Response;
 public class NotificationsFragment extends Fragment {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-
+    religious_details rd;
+    personal_details pd;
     private FragmentNotificationsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -61,6 +62,7 @@ public class NotificationsFragment extends Fragment {
             Gson gson = new Gson();
             String json = sharedPreferences.getString("rd", "");
             religious_details rd = gson.fromJson(json, religious_details.class);
+            this.rd = rd;
             if (rd!=null){
                 if (rd.getBirth_place()!=null){
                     binding.bithPlace.setText(rd.getBirth_place());
@@ -83,6 +85,7 @@ public class NotificationsFragment extends Fragment {
             Gson gson = new Gson();
             String json = sharedPreferences.getString("pd", "");
             personal_details pd = gson.fromJson(json, personal_details.class);
+            this.pd = pd;
             if (pd!=null){
                 if (pd.getBlood_group()!=null){
                     binding.bloodGroup.setText(pd.getBlood_group());
@@ -122,12 +125,14 @@ public class NotificationsFragment extends Fragment {
         binding.personal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CONSTANTS.PERSONALDETAIL = pd;
                 Navigation.findNavController(v).navigate(R.id.action_navigation_notifications_to_EditPerosnal);
             }
         });
         binding.religion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CONSTANTS.RELIGIOUSDETAIL =rd ;
                 Navigation.findNavController(v).navigate(R.id.action_navigation_notifications_to_EditReligion);
             }
         });
@@ -144,7 +149,7 @@ public class NotificationsFragment extends Fragment {
         Gson gson = new Gson();
         userDatabaseHelper db = new userDatabaseHelper(getContext());
         userDatabaseModel model = db.getUser(0);
-        Request request = new Request.Builder().url(CONSTANTS.BASEURL +"user-detail/2").addHeader("authorization" , "[]").get().build();
+        Request request = new Request.Builder().url(CONSTANTS.BASEURL +"user-detail/"+model.getId()).addHeader("authorization" , "[]").get().build();
         new OkHttpClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -164,11 +169,12 @@ public class NotificationsFragment extends Fragment {
                     Handler mHandler = new Handler(Looper.getMainLooper());
                     JSONObject jsonResponse = new JSONObject(response.body().string());
                     Type type = new TypeToken<List<data>>(){}.getType();
-                    personal_details pd = gson.fromJson(jsonResponse.optString("personal_details"), personal_details.class);
-                    religious_details rd = gson.fromJson(jsonResponse.optString("religious_details"), religious_details.class);
+                    pd = gson.fromJson(jsonResponse.optString("personal_details"), personal_details.class);
+                    rd  = gson.fromJson(jsonResponse.optString("religious_details"), religious_details.class);
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            binding.swipe.setRefreshing(false);
                             if (rd!=null){
                                 Gson gson = new Gson();
                                 String json = gson.toJson(rd);

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,7 +129,7 @@ public class EditReligion extends Fragment {
         });
 //        mother tongue status
         String[] maritalStatus= {
-                "Mother tongue" , "hindi / हिंदी " , "English / अंग्रेजी " , "Urdu / उर्दू "
+                "Mother tongue" , "hindi / हिंदी" , "English / अंग्रेजी" , "Urdu / उर्दू"
         };
         ArrayAdapter<String> maritalStatusAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, maritalStatus);
         binding.motherTongue.setAdapter(maritalStatusAdapter);
@@ -148,9 +149,9 @@ public class EditReligion extends Fragment {
 
 //        Zodiac signs
         String[] ZodiacSigns= {
-                "Zodiac Sign" , "Aries / मेष  " , "Taurus / वृषभ " , "Gemini / मिथुन  ","Cancer / कर्क   "
-                , "Leo / सिंह " , "Virgo / कन्या   ","Libra / तुला   " , "Scorpius / वृश्चिक  " , "Sagittarius / धनु  ",
-                "Capricornus / मकर    " , "Aquarius / कुंभ  " , "Pisces / मीन    "
+                "Zodiac Sign" , "Aries / मेष" , "Taurus / वृषभ" , "Gemini / मिथुन","Cancer / कर्क"
+                , "Leo / सिंह" , "Virgo / कन्या","Libra / तुला" , "Scorpius / वृश्चिक" , "Sagittarius / धनु",
+                "Capricornus / मकर" , "Aquarius / कुंभ" , "Pisces / मीन"
         };
         ArrayAdapter<String> zodiac = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, ZodiacSigns);
         binding.zodiac.setAdapter(zodiac);
@@ -205,6 +206,44 @@ public class EditReligion extends Fragment {
 
             }
         });
+        if (CONSTANTS.RELIGIOUSDETAIL!=null){
+            if (CONSTANTS.RELIGIOUSDETAIL.getBirth_time()!=null){
+                binding.birthDate.setText(CONSTANTS.RELIGIOUSDETAIL.getBirth_time());
+            }
+            if (CONSTANTS.RELIGIOUSDETAIL.getBirth_place()!=null){
+                binding.birthPlace.setText(CONSTANTS.RELIGIOUSDETAIL.getBirth_place());
+            }
+            if (CONSTANTS.RELIGIOUSDETAIL.getMother_tongue()!=null){
+                for (int i = 0; i < maritalStatus.length; i++) {
+                    Log.d("TAG", "onCreateView: mt "+CONSTANTS.RELIGIOUSDETAIL.getMother_tongue()+"  ->"+maritalStatus[i]);
+                    if (CONSTANTS.RELIGIOUSDETAIL.getMother_tongue()!=null && CONSTANTS.RELIGIOUSDETAIL.getMother_tongue().equalsIgnoreCase(maritalStatus[i])){
+                        Log.d("TAG", "onCreateView: mt ");
+                        binding.motherTongue.setSelection(i);
+                    }
+                }
+            }
+            if (CONSTANTS.RELIGIOUSDETAIL.getZodiac()!=null){
+                for (int i = 0; i < ZodiacSigns.length; i++) {
+                    if (CONSTANTS.RELIGIOUSDETAIL.getZodiac()!=null && CONSTANTS.RELIGIOUSDETAIL.getZodiac().trim().equalsIgnoreCase(ZodiacSigns[i])){
+                        binding.zodiac.setSelection(i);
+                    }
+                }
+            }
+            if (CONSTANTS.RELIGIOUSDETAIL.getManglic()!=null){
+                for (int i = 0; i < manglik.length; i++) {
+                    if (CONSTANTS.RELIGIOUSDETAIL.getManglic()!=null && CONSTANTS.RELIGIOUSDETAIL.getManglic().trim().equals(manglik[i])){
+                        binding.manglik.setSelection(i);
+                    }
+                }
+            }
+            if (CONSTANTS.RELIGIOUSDETAIL.getNakshtra()!=null){
+                for (int i = 0; i < nakshatra.length; i++) {
+                    if (CONSTANTS.RELIGIOUSDETAIL.getNakshtra()!=null && CONSTANTS.RELIGIOUSDETAIL.getNakshtra().trim().equals(nakshatra[i])){
+                        binding.nakshatra.setSelection(i);
+                    }
+                }
+            }
+        }
         binding.nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
