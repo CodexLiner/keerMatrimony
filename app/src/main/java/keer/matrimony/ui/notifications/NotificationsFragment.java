@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,11 +32,15 @@ import keer.matrimony.R;
 import keer.matrimony.database.userDatabaseHelper;
 import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.databinding.FragmentNotificationsBinding;
+import keer.matrimony.models.ContactDetails;
 import keer.matrimony.models.data;
+import keer.matrimony.models.education;
+import keer.matrimony.models.familyDetails;
 import keer.matrimony.models.personal_details;
 import keer.matrimony.models.religious_details;
 import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.ui.Activitys.HomeActivity;
+import keer.matrimony.utils.common;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -47,6 +52,9 @@ public class NotificationsFragment extends Fragment {
     SharedPreferences.Editor editor;
     religious_details rd;
     personal_details pd;
+    familyDetails fd ;
+    education ed;
+    ContactDetails cd;
     private FragmentNotificationsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -107,6 +115,48 @@ public class NotificationsFragment extends Fragment {
                 }
             }
         }else { getProfiles(); }
+        if (sharedPreferences.contains("cd")) {
+            Gson gson = new Gson();
+            String json = sharedPreferences.getString("cd", "");
+            ContactDetails cd = gson.fromJson(json, ContactDetails.class);
+            this.cd = cd;
+            common.setParams(binding.fatherContact, cd.getFath_contact());
+            common.setParams(binding.whatsapp, cd.getWhatsapp_no());
+            common.setParams(binding.PermanentAddress, cd.getPermanent_addr());
+            common.setParams(binding.PresentAddress, cd.getPresent_addr());
+
+        }
+        if (sharedPreferences.contains("ed")) {
+            Gson gson = new Gson();
+            String json = sharedPreferences.getString("ed", "");
+            education ed = gson.fromJson(json, education.class);
+            this.ed = ed;
+            common.setParams(binding.education, ed.getEdu());
+            common.setParams(binding.educationDetails, ed.getEdu_detail());
+            common.setParams(binding.occupation, ed.getOccupation());
+            common.setParams(binding.occupationDetails, ed.getOcu_detail());
+            common.setParams(binding.annualIncome, ed.getAnu_income());
+        }
+        if (sharedPreferences.contains("fd")) {
+            Gson gson = new Gson();
+            String json = sharedPreferences.getString("fd", "");
+            familyDetails fd = gson.fromJson(json, familyDetails.class);
+            this.fd = fd;
+            common.setParams(binding.cars, fd.getCar());
+            common.setParams(binding.house, fd.getHouse());
+            common.setParams(binding.mSister, fd.getNo_married_sis());
+            common.setParams(binding.umSister, fd.getNo_married_sis());
+            common.setParams(binding.fatherName, fd.getFather_name());
+            common.setParams(binding.fatherOcu, fd.getFather_occupation());
+            common.setParams(binding.motherName, fd.getMother_name());
+            common.setParams(binding.motherOcu, fd.getMother_occupation());
+            common.setParams(binding.unBrother, fd.getNo_unmarried_bro());
+            common.setParams(binding.marriedBorther, fd.getNo_married_bro());
+            common.setParams(binding.marriedBorther, fd.getNo_married_bro());
+            common.setParams(binding.marriedBorther, fd.getNo_married_bro());
+            common.setParams(binding.mamaji, fd.getMaternal_name());
+            common.setParams(binding.unclesGotra, fd.getMaternal_gotra());
+        }
         binding.swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -134,6 +184,20 @@ public class NotificationsFragment extends Fragment {
             public void onClick(View v) {
                 CONSTANTS.RELIGIOUSDETAIL =rd ;
                 Navigation.findNavController(v).navigate(R.id.action_navigation_notifications_to_EditReligion);
+            }
+        });
+        binding.contactDe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CONSTANTS.CONTACTDETAILS =cd ;
+                Navigation.findNavController(v).navigate(R.id.action_navigation_notifications_to_EditContact);
+            }
+        });
+        binding.EditEducation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CONSTANTS.EDUCATIONDETAILSEDIT =ed ;
+                Navigation.findNavController(v).navigate(R.id.action_navigation_notifications_to_EditContact);
             }
         });
 //        binding.motherTongue.setText(model.ge);
@@ -171,10 +235,55 @@ public class NotificationsFragment extends Fragment {
                     Type type = new TypeToken<List<data>>(){}.getType();
                     pd = gson.fromJson(jsonResponse.optString("personal_details"), personal_details.class);
                     rd  = gson.fromJson(jsonResponse.optString("religious_details"), religious_details.class);
+                    fd  = gson.fromJson(jsonResponse.optString("family_details"), familyDetails.class);
+                    ed  = gson.fromJson(jsonResponse.optString("education"), education.class);
+                    cd  = gson.fromJson(jsonResponse.optString("contact_details"), ContactDetails.class);
+
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             binding.swipe.setRefreshing(false);
+                            if (cd!=null){
+                                Gson gson = new Gson();
+                                String json = gson.toJson(cd);
+                                editor.putString("cd", json);
+                                editor.commit();
+                                common.setParams(binding.fatherContact, cd.getFath_contact());
+                                common.setParams(binding.whatsapp, cd.getWhatsapp_no());
+                                common.setParams(binding.PermanentAddress, cd.getPermanent_addr());
+                                common.setParams(binding.PresentAddress, cd.getPresent_addr());
+                            }
+                            if (ed!=null){
+                                Gson gson = new Gson();
+                                String json = gson.toJson(ed);
+                                editor.putString("ed", json);
+                                editor.commit();
+                                common.setParams(binding.education, ed.getEdu());
+                                common.setParams(binding.educationDetails, ed.getEdu_detail());
+                                common.setParams(binding.occupation, ed.getOccupation());
+                                common.setParams(binding.occupationDetails, ed.getOcu_detail());
+                                common.setParams(binding.annualIncome, ed.getAnu_income());
+                            }
+                            if (fd!=null){
+                                Gson gson = new Gson();
+                                String json = gson.toJson(fd);
+                                editor.putString("fd", json);
+                                editor.commit();
+                                common.setParams(binding.cars, fd.getCar());
+                                common.setParams(binding.house, fd.getHouse());
+                                common.setParams(binding.mSister, fd.getNo_married_sis());
+                                common.setParams(binding.umSister, fd.getNo_married_sis());
+                                common.setParams(binding.fatherName, fd.getFather_name());
+                                common.setParams(binding.fatherOcu, fd.getFather_occupation());
+                                common.setParams(binding.motherName, fd.getMother_name());
+                                common.setParams(binding.motherOcu, fd.getMother_occupation());
+                                common.setParams(binding.unBrother, fd.getNo_unmarried_bro());
+                                common.setParams(binding.marriedBorther, fd.getNo_married_bro());
+                                common.setParams(binding.marriedBorther, fd.getNo_married_bro());
+                                common.setParams(binding.marriedBorther, fd.getNo_married_bro());
+                                common.setParams(binding.mamaji, fd.getMaternal_name());
+                                common.setParams(binding.unclesGotra, fd.getMaternal_gotra());
+                            }
                             if (rd!=null){
                                 Gson gson = new Gson();
                                 String json = gson.toJson(rd);
@@ -221,6 +330,7 @@ public class NotificationsFragment extends Fragment {
                                 }
                             }
                         }
+
                     });
 
                 } catch (JSONException e) {
@@ -231,5 +341,4 @@ public class NotificationsFragment extends Fragment {
             }
         });
     }
-
 }
