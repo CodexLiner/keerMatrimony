@@ -27,6 +27,9 @@ import java.util.List;
 
 import keer.matrimony.database.userDatabaseHelper;
 import keer.matrimony.database.userDatabaseModel;
+import keer.matrimony.models.ContactDetails;
+import keer.matrimony.models.education;
+import keer.matrimony.models.familyDetails;
 import keer.matrimony.models.personal_details;
 import keer.matrimony.models.religious_details;
 import keer.matrimony.other.CONSTANTS;
@@ -34,6 +37,7 @@ import keer.matrimony.databinding.FragmentProfileDetailsBinding;
 import keer.matrimony.models.data;
 import keer.matrimony.ui.Activitys.HomeActivity;
 import keer.matrimony.ui.Activitys.SearchResult;
+import keer.matrimony.utils.common;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -44,6 +48,9 @@ public class ProfileDetails extends Fragment {
     @NonNull FragmentProfileDetailsBinding binding;
     data data;
     Activity activity;
+    familyDetails fd ;
+    education ed;
+    ContactDetails cd;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -109,11 +116,6 @@ public class ProfileDetails extends Fragment {
             Picasso.with(getContext()).load(CONSTANTS.BASEURLPROFILE + data.getProfile()).into(binding.profile);
         }
 
-
-
-
-
-
         return binding.getRoot();
     }
     public void getProfiles(String id){
@@ -143,10 +145,41 @@ public class ProfileDetails extends Fragment {
                     Type type = new TypeToken<List<data>>(){}.getType();
                     personal_details pd = gson.fromJson(jsonResponse.optString("personal_details"), personal_details.class);
                     religious_details rd = gson.fromJson(jsonResponse.optString("religious_details"), religious_details.class);
+                    fd  = gson.fromJson(jsonResponse.optString("family_details"), familyDetails.class);
+                    ed  = gson.fromJson(jsonResponse.optString("education"), education.class);
+                    cd  = gson.fromJson(jsonResponse.optString("contact_details"), ContactDetails.class);
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-
+                            if (cd!=null){
+                                common.setParams(binding.fatherContact, cd.getFath_contact());
+                                common.setParams(binding.whatsapp, cd.getWhatsapp_no());
+                                common.setParams(binding.PermanentAddress, cd.getPermanent_addr());
+                                common.setParams(binding.PresentAddress, cd.getPresent_addr());
+                            }
+                            if (ed!=null){
+                                common.setParams(binding.education, ed.getEdu());
+                                common.setParams(binding.educationDetails, ed.getEdu_detail());
+                                common.setParams(binding.occupation, ed.getOccupation());
+                                common.setParams(binding.occupationDetails, ed.getOcu_detail());
+                                common.setParams(binding.annualIncome, ed.getAnu_income());
+                            }
+                            if (fd!=null){
+                                common.setParams(binding.cars, fd.getCar());
+                                common.setParams(binding.house, fd.getHouse());
+                                common.setParams(binding.mSister, fd.getNo_married_sis());
+                                common.setParams(binding.umSister, fd.getNo_married_sis());
+                                common.setParams(binding.fatherName, fd.getFather_name());
+                                common.setParams(binding.fatherOcu, fd.getFather_occupation());
+                                common.setParams(binding.motherName, fd.getMother_name());
+                                common.setParams(binding.motherOcu, fd.getMother_occupation());
+                                common.setParams(binding.unBrother, fd.getNo_unmarried_bro());
+                                common.setParams(binding.marriedBorther, fd.getNo_married_bro());
+                                common.setParams(binding.marriedBorther, fd.getNo_married_bro());
+                                common.setParams(binding.marriedBorther, fd.getNo_married_bro());
+                                common.setParams(binding.mamaji, fd.getMaternal_name());
+                                common.setParams(binding.unclesGotra, fd.getMaternal_gotra());
+                            }
                             if (rd!=null){
                                 Gson gson = new Gson();
                                 String json = gson.toJson(rd);

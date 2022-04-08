@@ -197,7 +197,7 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 CONSTANTS.EDUCATIONDETAILSEDIT =ed ;
-                Navigation.findNavController(v).navigate(R.id.action_navigation_notifications_to_EditContact);
+                Navigation.findNavController(v).navigate(R.id.action_navigation_notifications_to_EditEducation);
             }
         });
 //        binding.motherTongue.setText(model.ge);
