@@ -81,6 +81,7 @@ public class EditPersonal extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentEditPersonalBinding.inflate(inflater);
         ((HomeActivity) getActivity()).setActionBarTitle("Edit Personal Profile Details");
+        ((HomeActivity) requireActivity()).hide(View.INVISIBLE);
         Weight = binding.weight.getText().toString();
 //        heightAdapter
         String[] heightArray = { "Height", "5.0 feet", "5.5 feet", "6.0 feet", "6.5 feet"};

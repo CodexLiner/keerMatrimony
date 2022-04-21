@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import keer.matrimony.R;
 import keer.matrimony.database.userDatabaseHelper;
@@ -74,7 +75,8 @@ public class EditPartner extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentEditPartnerBinding.inflate(inflater);
-        ((HomeActivity) getActivity()).setActionBarTitle("Edit Partnert Details");
+        ((HomeActivity) requireActivity()).hide(View.INVISIBLE);
+        ((HomeActivity) requireActivity()).setActionBarTitle("Edit Partnert Details");
         binding.nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

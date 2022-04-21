@@ -58,6 +58,7 @@ public class HomeFragment extends Fragment {
         keer.matrimony.ui.home.HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(keer.matrimony.ui.home.HomeViewModel.class);
         ((HomeActivity) getActivity()).setActionBarTitle("Keer Matrimony");
+
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         ArrayList<String> list = new ArrayList<>();
         View root = binding.getRoot();

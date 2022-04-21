@@ -60,6 +60,8 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         if (activity==null){
             ((HomeActivity) getActivity()).setActionBarTitle("Latest Profiles");
+            ((HomeActivity) getActivity()).hide(View.VISIBLE);
+
             BottomNavigationView bm = getActivity().findViewById(R.id.nav_view);
             bm.setSelectedItemId(R.id.navigation_dashboard);
             binding.profileRec.setLayoutManager(new LinearLayoutManager(getContext() , RecyclerView.VERTICAL , false));

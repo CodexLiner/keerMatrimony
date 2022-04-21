@@ -1,16 +1,20 @@
 package keer.matrimony.Adapters;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,10 +30,13 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 
+import keer.matrimony.database.userDatabaseHelper;
+import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.R;
 import keer.matrimony.UIFragments.ProfileDetails;
 import keer.matrimony.models.data;
+import keer.matrimony.utils.common;
 
 public class ProfileListAdapters extends RecyclerView.Adapter<ProfileListAdapters.holder> {
     List<data> list;
@@ -53,6 +60,10 @@ public class ProfileListAdapters extends RecyclerView.Adapter<ProfileListAdapter
 
     @Override
     public void onBindViewHolder(@NonNull holder holder, int i) {
+        userDatabaseModel model;
+        userDatabaseHelper db = new userDatabaseHelper(holder.ProfileImage.getContext());
+        model = db.getUser(0);
+
         int position = i ;
         if (list.get(position).getFirst_name()!=null){
             String name = list.get(position).getFirst_name();
@@ -114,6 +125,48 @@ public class ProfileListAdapters extends RecyclerView.Adapter<ProfileListAdapter
             @Override
             public void onClick(View v) {
                 Toast.makeText(holder.ProfileImage.getContext(), "Added to favourite", Toast.LENGTH_SHORT).show();
+            }
+        });
+        holder.callButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog dialog = new Dialog(holder.callButton.getContext());
+                dialog.setContentView(R.layout.call_dialog);
+                WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
+                layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                LinearLayout active = dialog.findViewById(R.id.active);
+                LinearLayout inActive = dialog.findViewById(R.id.inActive);
+                dialog.getWindow().setAttributes(layoutParams);
+                dialog.getWindow().setBackgroundDrawable(null);
+                if (model.getStatus().equals("1")){
+                    active.setVisibility(View.VISIBLE);
+                    dialog.setCancelable(false);
+                }else {
+                    inActive.setVisibility(View.VISIBLE);
+                    common.Verify(holder.ProfileImage.getContext() , String.valueOf(model.getId()));
+                }
+
+                TextView da = dialog.findViewById(R.id.dialogText);
+
+                String finalMessage = CONSTANTS.CALLMESSAGE+ "<b>" + list.get(position).getFirst_name() + "</b>";
+                da.setText(Html.fromHtml(finalMessage , 0));
+                da.setLineHeight(60);
+
+                Button close = dialog.findViewById(R.id.buttonClose);
+                Button confirm = dialog.findViewById(R.id.buttonConfirm);
+                Button close2 = dialog.findViewById(R.id.buttonClose2);
+
+                close.setOnClickListener((View x)->{
+                    dialog.dismiss();
+                });
+                close2.setOnClickListener((View x)->{
+                    dialog.dismiss();
+                });
+                confirm.setOnClickListener((View call)->{
+                    common.startCall(list.get(position).getMobile() , holder.ProfileImage.getContext());
+                    dialog.dismiss();
+                });
+                dialog.show();
             }
         });
         holder.ProfileImage.setOnClickListener(new View.OnClickListener() {

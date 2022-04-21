@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import keer.matrimony.R;
 import keer.matrimony.database.userDatabaseHelper;
 import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.models.ContactDetails;
@@ -94,6 +95,7 @@ public class ProfileDetails extends Fragment {
         binding = FragmentProfileDetailsBinding.inflate(inflater);
         // Inflate the layout for this fragment
        if (activity==null){
+           ((HomeActivity) getActivity()).hide(View.INVISIBLE);
            ((HomeActivity) getActivity()).setActionBarTitle(data.getFirst_name()+" "+data.getLast_name());
        }else {
            ((SearchResult) getActivity()).setActionBarTitle(data.getFirst_name()+" "+data.getLast_name());

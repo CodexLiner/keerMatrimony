@@ -89,6 +89,7 @@ public class EditReligion extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ((HomeActivity) getActivity()).setActionBarTitle("Edit Religion Details");
+        ((HomeActivity) requireActivity()).hide(View.INVISIBLE);
         binding = FragmentEditReligionBinding.inflate(inflater);
 //        date of birth picker
         Gotra = binding.gotra.getText().toString();

@@ -2,6 +2,7 @@ package keer.matrimony.ui.notifications;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,14 +19,19 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
 import keer.matrimony.R;
@@ -63,7 +69,10 @@ public class NotificationsFragment extends Fragment {
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
         ((HomeActivity) getActivity()).setActionBarTitle("Your Profile");
+        ((HomeActivity) getActivity()).hide(View.VISIBLE);
+
         sharedPreferences = getContext().getSharedPreferences("profile" , Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         if (sharedPreferences.contains("rd")){
@@ -167,6 +176,10 @@ public class NotificationsFragment extends Fragment {
         //getProfiles();
         userDatabaseHelper db = new userDatabaseHelper(getContext());
         userDatabaseModel model = db .getUser(0);
+        if (model.getPartner_preference()!=null){
+            binding.partnerPref.setText(model.getPartner_preference());
+        }
+        setProfile(model.getProfile());
         binding.dob.setText(model.getDob());
         binding.dob2.setText(model.getDob());
         String name = model.getFirst_name()+" "+model.getLast_name();
@@ -202,6 +215,13 @@ public class NotificationsFragment extends Fragment {
         });
 //        binding.motherTongue.setText(model.ge);
         return root;
+    }
+
+    private void setProfile(String profile) {
+       try {
+           Glide.with(binding.profile).load(CONSTANTS.BASEURLPROFILE+profile).placeholder(R.drawable.plaholder).into(binding.profile);
+       }catch (Exception ignored){}
+
     }
 
     @Override

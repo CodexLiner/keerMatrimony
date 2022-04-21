@@ -80,7 +80,7 @@ public class EditEducation extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentEditEducationBinding.inflate(inflater);
         ((HomeActivity) getActivity()).setActionBarTitle("Edit Education Details");
-
+        ((HomeActivity) requireActivity()).hide(View.INVISIBLE);
         Prof = binding.occupationDetails.getText().toString();
         EduD = binding.educationDetails.getText().toString();
 //        heightAdapter

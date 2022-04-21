@@ -17,6 +17,7 @@ public class CONSTANTS {
     public static final String RELIGIOUS = "update-religious-details/";
     public static final String CONTACTINFO = "update-contact-details/";
     public static final String FAMILYDETAILS = "update-family-details/";
+    public static final String CALLMESSAGE = "Are you sure want to call on this number ?<br>Click Confirm to Call ";
     public static  education EDUCATIONDETAILSEDIT ;
     public static  ContactDetails CONTACTDETAILS ;
     public static  religious_details RELIGIOUSDETAIL;

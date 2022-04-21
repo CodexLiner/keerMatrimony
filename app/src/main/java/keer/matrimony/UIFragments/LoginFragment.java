@@ -109,7 +109,6 @@ public class LoginFragment extends Fragment {
 
       return binding.getRoot();
     }
-
     private void Verify(String email, String pass) {
         Gson gson = new Gson();
         Map<String , String > map = new HashMap<>();

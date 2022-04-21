@@ -6,8 +6,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -48,7 +51,7 @@ import okhttp3.Response;
 public class HomeActivity extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
-
+    BottomNavigationView navView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,19 +64,27 @@ public class HomeActivity extends AppCompatActivity {
         // showing the back button in action bar
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+         navView = findViewById(R.id.nav_view);
+        navView.setSelectedItemId(R.id.navigation_dashboard);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_search , R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
+
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
     }
     public void setActionBarTitle(String title){
         if (getSupportActionBar()!=null){
             getSupportActionBar().setTitle(title);
+        }
+    }
+    public  void hide(int id){
+        if (navView!=null){
+            navView.setVisibility(id);
         }
     }
     @Override
@@ -151,11 +162,5 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
-    }
-    public void removeFragment(Fragment fragment){
-        androidx.fragment.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.remove(fragment);
-        fragmentTransaction.commit();
     }
 }

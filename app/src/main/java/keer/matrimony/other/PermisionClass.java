@@ -31,7 +31,7 @@ public class PermisionClass {
 //            Manifest.permission.READ_CALL_LOG,
 //            Manifest.permission.READ_SYNC_SETTINGS,
 //            Manifest.permission.WRITE_SYNC_SETTINGS,
-//            Manifest.permission.CALL_PHONE,
+            Manifest.permission.CALL_PHONE,
 //            Manifest.permission.READ_SMS,
 //            Manifest.permission.WRITE_CONTACTS
 

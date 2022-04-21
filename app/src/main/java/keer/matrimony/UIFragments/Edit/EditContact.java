@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import keer.matrimony.R;
 import keer.matrimony.UIFragments.onBoarding.EducationDetails;
@@ -83,6 +84,8 @@ public class EditContact extends Fragment {
         whatsappNumber[0] = binding.whatsapp.getText().toString();
         Pmadd[0] = binding.PermanentAddress.getText().toString();
         perAdd[0] = binding.PresentAddress.getText().toString();
+
+        ((HomeActivity) requireActivity()).hide(View.INVISIBLE);
 
 
         binding.nextButton.setOnClickListener(new View.OnClickListener() {

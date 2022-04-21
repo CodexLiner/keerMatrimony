@@ -16,8 +16,10 @@
 
     <style name="Theme.CustomeTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#ff5b84</item>
-        <item name="colorPrimaryVariant">#ff5b84</item>
+<!--        <item name="colorPrimary">#ff5b84</item>-->
+<!--        <item name="colorPrimaryVariant">#ff5b84</item>-->
+        <item name="colorPrimary">#0066fe</item>
+        <item name="colorPrimaryVariant">#0066fe</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#ff5b84</item>

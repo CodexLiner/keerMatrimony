@@ -7,4 +7,5 @@
     <string name="title_dashboard">List</string>
     <string name="title_notifications">Profile</string>
     <string name="place_of_birth">Place Of Birth</string>
+    <string name="under_review"><![CDATA[Your profile has been submitted & will be reviewed by our team. You will be notified if any extra information is needed]]></string>
 </resources>
