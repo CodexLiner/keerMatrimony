@@ -411,6 +411,6 @@ public class SignUpFragment extends Fragment {
                         }
                     });
 //                    Crop.of(uri, outputUri).asSquare().start(getActivity());
-                }});
+ }});
 
 }

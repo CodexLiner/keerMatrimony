@@ -31,7 +31,8 @@ public class userDatabaseHelper extends SQLiteOpenHelper {
         }
         // get writable database as we want to write data
         userDatabaseModel c = getUser(0);
-        if (c!= null && c.getId()==0){
+        Log.d("TAG", "onCreateViewx: "+c.toString());
+        if (c!= null){
             delete(0);
            Log.d("TAG", "insertNote :fg");
         }

@@ -42,12 +42,20 @@
         <action
             android:id="@+id/action_navigation_notifications_to_EditEducation"
             app:destination="@id/EditEducation" />
+        <action
+            android:id="@+id/action_navigation_notifications_to_EditPartner"
+            app:destination="@id/EditPartner" />
     </fragment>
     <fragment
         android:id="@+id/EditPerosnal"
         android:name="keer.matrimony.UIFragments.Edit.EditPersonal"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_edit_personal" />
+    <fragment
+        android:id="@+id/EditPartner"
+        android:name="keer.matrimony.UIFragments.Edit.EditPartner"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_edit_partner" />
     <fragment
         android:id="@+id/EditReligion"
         android:name="keer.matrimony.UIFragments.Edit.EditReligion"

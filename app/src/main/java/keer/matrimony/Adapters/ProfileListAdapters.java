@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,8 +64,8 @@ public class ProfileListAdapters extends RecyclerView.Adapter<ProfileListAdapter
         userDatabaseModel model;
         userDatabaseHelper db = new userDatabaseHelper(holder.ProfileImage.getContext());
         model = db.getUser(0);
-
-        int position = i ;
+        Log.d("TAG", "onBindViewHolder: "+model.getId());
+        final int position = i ;
         if (list.get(position).getFirst_name()!=null){
             String name = list.get(position).getFirst_name();
             if (list.get(position).getLast_name()!=null){

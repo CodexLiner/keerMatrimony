@@ -2,9 +2,12 @@ package keer.matrimony.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +19,10 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +31,7 @@ import keer.matrimony.database.userDatabaseHelper;
 import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.models.data;
 import keer.matrimony.other.CONSTANTS;
+import keer.matrimony.other.ImageUpload;
 import keer.matrimony.ui.Activitys.HomeActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -45,6 +53,37 @@ public class common {
            intent.setData(Uri.parse("tel:"+mNum));
            context.startActivity(intent);
        }catch (Exception ignore){}
+    }
+//    uri to bitmap converter
+    public static Bitmap uriToBitmap(Uri selectedFileUri, Context context) {
+        try {
+            ParcelFileDescriptor parcelFileDescriptor = context.getContentResolver().openFileDescriptor(selectedFileUri, "r");
+            FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+            Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);;
+            parcelFileDescriptor.close();
+            return image;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+//    upload bitmap image to server
+    public static void uploadImage(Bitmap bm , Context context , int id){
+        File file = new File(context.getExternalCacheDir(), "keerProfile.jpg");
+        try {
+            boolean f = file.createNewFile();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+            byte[] bitmapdata = bos.toByteArray();
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(bitmapdata);
+            fos.flush();
+            fos.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        ImageUpload imageUpload = new ImageUpload(file , id);
+        imageUpload.execute();
     }
     public static void Verify(Context context , String id) {
         Gson gson = new Gson();

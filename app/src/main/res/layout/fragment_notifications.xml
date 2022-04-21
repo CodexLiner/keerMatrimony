@@ -19,7 +19,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="212dp">
+                android:layout_height="wrap_content">
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/profile"
                     app:riv_corner_radius="100dp"
@@ -36,12 +36,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Partner Preferences"/>
-                <TextView
-                    android:id="@+id/partnerPref"
-                    android:gravity="center"
+                <LinearLayout
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/partnerPref"
+                        android:paddingStart="29dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Add Partner Preferences" />
+                    <ImageView
+                        android:id="@+id/editPartner"
+                        android:foreground="?attr/selectableItemBackgroundBorderless"
+                        android:padding="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_fi_rr_pencil"/>
+                </LinearLayout>
+<!--                <TextView-->
+<!--                    android:id="@+id/partnerPref"-->
+<!--                    android:gravity="center"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent" />-->
             </LinearLayout>
             <LinearLayout
                 android:layout_margin="20dp"

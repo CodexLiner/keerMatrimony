@@ -40,6 +40,7 @@ import keer.matrimony.R;
 import keer.matrimony.databinding.ActivityHomeBinding;
 import keer.matrimony.models.data;
 import keer.matrimony.other.PermisionClass;
+import keer.matrimony.utils.common;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -145,6 +146,8 @@ public class HomeActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 try {
                     JSONObject jsonResponse = new JSONObject(response.body().string());
+                    Log.d("TAG", "onResponse: "+jsonResponse.toString());
+                    common.Verify(getApplicationContext() , String.valueOf(ID));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

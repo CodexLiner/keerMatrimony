@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -89,9 +90,9 @@ public class EditPartner extends Fragment {
                 map.put("partner_preference" , partner);
                 userDatabaseHelper db = new userDatabaseHelper(getContext());
                 userDatabaseModel model = db .getUser(0);
-                ((HomeActivity) getActivity()).setPersonalDetails(map , CONSTANTS.PARTNERPREF , model.getId());
-                startActivity(new Intent(getContext() , HomeActivity.class));
-                getActivity().finishAffinity();
+                ((HomeActivity) requireActivity()).setPersonalDetails(map , CONSTANTS.PARTNERPREF , model.getId());
+                requireActivity().onBackPressed();
+                Toast.makeText(getActivity(), "Details Updated Successfully", Toast.LENGTH_SHORT).show();
             }
         });
 

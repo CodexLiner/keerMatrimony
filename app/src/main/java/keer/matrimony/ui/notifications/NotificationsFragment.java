@@ -2,6 +2,7 @@ package keer.matrimony.ui.notifications;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -26,13 +30,16 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 
 import keer.matrimony.R;
 import keer.matrimony.database.userDatabaseHelper;
@@ -45,6 +52,7 @@ import keer.matrimony.models.familyDetails;
 import keer.matrimony.models.personal_details;
 import keer.matrimony.models.religious_details;
 import keer.matrimony.other.CONSTANTS;
+import keer.matrimony.other.ImageUpload;
 import keer.matrimony.ui.Activitys.HomeActivity;
 import keer.matrimony.utils.common;
 import okhttp3.Call;
@@ -69,9 +77,12 @@ public class NotificationsFragment extends Fragment {
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        binding.profile.setOnClickListener((View click)->{
+            showFileChooser();
+        });
 
-        ((HomeActivity) getActivity()).setActionBarTitle("Your Profile");
-        ((HomeActivity) getActivity()).hide(View.VISIBLE);
+        ((HomeActivity) requireActivity()).setActionBarTitle("Your Profile");
+        ((HomeActivity) requireActivity()).hide(View.VISIBLE);
 
         sharedPreferences = getContext().getSharedPreferences("profile" , Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -176,6 +187,7 @@ public class NotificationsFragment extends Fragment {
         //getProfiles();
         userDatabaseHelper db = new userDatabaseHelper(getContext());
         userDatabaseModel model = db .getUser(0);
+        Log.d("TAG", "onCreateView: "+model.toString());
         if (model.getPartner_preference()!=null){
             binding.partnerPref.setText(model.getPartner_preference());
         }
@@ -199,6 +211,10 @@ public class NotificationsFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_navigation_notifications_to_EditReligion);
             }
         });
+        binding.editPartner.setOnClickListener((View part)->{
+            Navigation.findNavController(part).navigate(R.id.action_navigation_notifications_to_EditPartner);
+
+        });
         binding.contactDe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -219,7 +235,8 @@ public class NotificationsFragment extends Fragment {
 
     private void setProfile(String profile) {
        try {
-           Glide.with(binding.profile).load(CONSTANTS.BASEURLPROFILE+profile).placeholder(R.drawable.plaholder).into(binding.profile);
+           File file = new File(requireContext().getExternalCacheDir(), "keerProfile.jpg");
+           binding.profile.setImageURI(Uri.parse(file.getPath()));
        }catch (Exception ignored){}
 
     }
@@ -361,4 +378,25 @@ public class NotificationsFragment extends Fragment {
             }
         });
     }
+    private void showFileChooser() {
+        mGetContent.launch("image/*");
+    }
+    ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
+            new ActivityResultCallback<Uri>() {
+                @Override
+                public void onActivityResult(Uri uri) {
+                    Handler mHandler = new Handler(Looper.getMainLooper());
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            userDatabaseModel model;
+                            userDatabaseHelper db = new userDatabaseHelper(getContext());
+                            model = db.getUser(0);
+                            Bitmap bm =  common.uriToBitmap(uri , requireContext());
+                            common.uploadImage(bm , requireContext(), model.getId());
+                            binding.profile.setImageURI(uri);
+                        }
+                    });
+//                    Crop.of(uri, outputUri).asSquare().start(getActivity());
+ }});
 }
