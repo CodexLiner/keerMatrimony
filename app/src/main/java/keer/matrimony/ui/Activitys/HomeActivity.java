@@ -1,6 +1,7 @@
 package keer.matrimony.ui.Activitys;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -146,7 +147,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 try {
                     JSONObject jsonResponse = new JSONObject(response.body().string());
-                    Log.d("TAG", "onResponse: "+jsonResponse.toString());
                     common.Verify(getApplicationContext() , String.valueOf(ID));
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -156,7 +156,10 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
-
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//    }
     @Override
     public void onBackPressed(){
         FragmentManager fm = getFragmentManager();

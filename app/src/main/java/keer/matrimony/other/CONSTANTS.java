@@ -5,6 +5,7 @@ import java.util.List;
 import keer.matrimony.models.ContactDetails;
 import keer.matrimony.models.data;
 import keer.matrimony.models.education;
+import keer.matrimony.models.familyDetails;
 import keer.matrimony.models.personal_details;
 import keer.matrimony.models.religious_details;
 
@@ -26,4 +27,5 @@ public class CONSTANTS {
     public static List<data> DATA ;
     public static data DATAs ;
     public static String mediaType = "application/json; charset=utf-8";
+    public static familyDetails family;
 }

@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_navigation_notifications_to_EditPartner"
             app:destination="@id/EditPartner" />
+        <action
+            android:id="@+id/action_navigation_notifications_to_EditFamily"
+            app:destination="@id/EditFamily" />
     </fragment>
     <fragment
         android:id="@+id/EditPerosnal"
@@ -61,6 +64,11 @@
         android:name="keer.matrimony.UIFragments.Edit.EditReligion"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_edit_personal" />
+    <fragment
+        android:id="@+id/EditFamily"
+        android:name="keer.matrimony.UIFragments.Edit.EditFamilyDetails"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_edit_family_details" />
     <fragment
         android:id="@+id/EditContact"
         android:name="keer.matrimony.UIFragments.Edit.EditContact"

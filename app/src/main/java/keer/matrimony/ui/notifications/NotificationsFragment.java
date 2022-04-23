@@ -84,7 +84,7 @@ public class NotificationsFragment extends Fragment {
         ((HomeActivity) requireActivity()).setActionBarTitle("Your Profile");
         ((HomeActivity) requireActivity()).hide(View.VISIBLE);
 
-        sharedPreferences = getContext().getSharedPreferences("profile" , Context.MODE_PRIVATE);
+        sharedPreferences = requireContext().getSharedPreferences("profile" , Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         if (sharedPreferences.contains("rd")){
             Gson gson = new Gson();
@@ -134,7 +134,9 @@ public class NotificationsFragment extends Fragment {
                     binding.maritalStatus.setText(pd.getMaretial_status());
                 }
             }
-        }else { getProfiles(); }
+        }else {
+            getProfiles();
+        }
         if (sharedPreferences.contains("cd")) {
             Gson gson = new Gson();
             String json = sharedPreferences.getString("cd", "");
@@ -228,6 +230,10 @@ public class NotificationsFragment extends Fragment {
                 CONSTANTS.EDUCATIONDETAILSEDIT =ed ;
                 Navigation.findNavController(v).navigate(R.id.action_navigation_notifications_to_EditEducation);
             }
+        });
+        binding.family.setOnClickListener((View family)->{
+            CONSTANTS.family = fd;
+            Navigation.findNavController(family).navigate(R.id.action_navigation_notifications_to_EditFamily);
         });
 //        binding.motherTongue.setText(model.ge);
         return root;
@@ -389,12 +395,14 @@ public class NotificationsFragment extends Fragment {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            userDatabaseModel model;
-                            userDatabaseHelper db = new userDatabaseHelper(getContext());
-                            model = db.getUser(0);
-                            Bitmap bm =  common.uriToBitmap(uri , requireContext());
-                            common.uploadImage(bm , requireContext(), model.getId());
-                            binding.profile.setImageURI(uri);
+                            if(uri!=null) {
+                                userDatabaseModel model;
+                                userDatabaseHelper db = new userDatabaseHelper(getContext());
+                                model = db.getUser(0);
+                                Bitmap bm = common.uriToBitmap(uri, requireContext());
+                                common.uploadImage(bm, requireContext(), model.getId());
+                                binding.profile.setImageURI(uri);
+                            }
                         }
                     });
 //                    Crop.of(uri, outputUri).asSquare().start(getActivity());
