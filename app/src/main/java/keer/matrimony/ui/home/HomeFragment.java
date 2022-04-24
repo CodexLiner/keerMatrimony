@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import keer.matrimony.Adapters.ProfileListAdapters;
 
@@ -57,7 +58,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         keer.matrimony.ui.home.HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(keer.matrimony.ui.home.HomeViewModel.class);
-        ((HomeActivity) getActivity()).setActionBarTitle("Keer Matrimony");
+        ((HomeActivity) requireActivity()).setActionBarTitle("Keer Matrimony");
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         ArrayList<String> list = new ArrayList<>();
@@ -111,7 +112,6 @@ public class HomeFragment extends Fragment {
                     toDate = null;
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 

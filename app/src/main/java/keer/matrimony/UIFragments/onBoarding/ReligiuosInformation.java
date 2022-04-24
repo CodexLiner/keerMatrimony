@@ -29,6 +29,7 @@ import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.databinding.FragmentReligiuosInformationBinding;
 import keer.matrimony.ui.Activitys.MainActivity;
 import keer.matrimony.R;
+import keer.matrimony.utils.onBoardingList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -114,16 +115,13 @@ public class ReligiuosInformation extends Fragment {
             }
         });
 //        mother tongue status
-        String[] maritalStatus= {
-                "Mother tongue" , "hindi / हिंदी " , "English / अंग्रेजी " , "Urdu / उर्दू "
-        };
-        ArrayAdapter<String> maritalStatusAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, maritalStatus);
+        ArrayAdapter<String> maritalStatusAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.motherTongue);
         binding.motherTongue.setAdapter(maritalStatusAdapter);
         binding.motherTongue.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    mTongue = maritalStatus[position];
+                    mTongue =  onBoardingList.motherTongue[position];
                 }
             }
 
@@ -134,18 +132,13 @@ public class ReligiuosInformation extends Fragment {
         });
 
 //        Zodiac signs
-        String[] ZodiacSigns= {
-                "Zodiac Sign" , "Aries / मेष  " , "Taurus / वृषभ " , "Gemini / मिथुन  ","Cancer / कर्क   "
-                , "Leo / सिंह " , "Virgo / कन्या   ","Libra / तुला   " , "Scorpius / वृश्चिक  " , "Sagittarius / धनु  ",
-                "Capricornus / मकर    " , "Aquarius / कुंभ  " , "Pisces / मीन    "
-        };
-        ArrayAdapter<String> zodiac = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, ZodiacSigns);
+        ArrayAdapter<String> zodiac = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.ZodiacSigns);
         binding.zodiac.setAdapter(zodiac);
         binding.zodiac.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    ZodiacSign = ZodiacSigns[position];
+                    ZodiacSign = onBoardingList.ZodiacSigns[position];
                 }
             }
 
@@ -155,16 +148,14 @@ public class ReligiuosInformation extends Fragment {
             }
         });
 //        Manglik Types
-        String[] manglik= {
-                "Manglik Type" , "Non Manglik" , "Manglik"
-        };
-        ArrayAdapter<String> manglikAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, manglik);
+
+        ArrayAdapter<String> manglikAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.manglik);
         binding.manglik.setAdapter(manglikAdapter);
         binding.manglik.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    ManglikType = manglik[position];
+                    ManglikType = onBoardingList.manglik[position];
                 }
             }
 
@@ -174,16 +165,13 @@ public class ReligiuosInformation extends Fragment {
             }
         });
 //        nakshatra Types
-        String[] nakshatra= { "Nakshatra" ,
-                "Rohini", "Mrigashirsha", "Magha", "Uttara Phalguni", "Hasta", "Swat", "Anuradha", "Mula or Moola", "Uttara Ashadha", "Uttara Bhadrapada" , "Revati" , "i don't know"
-        };
-        ArrayAdapter<String> nAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, nakshatra);
+        ArrayAdapter<String> nAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.nakshatra);
         binding.nakshatra.setAdapter(nAdapter);
         binding.nakshatra.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    Nakshatra = nakshatra[position];
+                    Nakshatra = onBoardingList.nakshatra[position];
                 }
             }
 

@@ -51,6 +51,7 @@ import keer.matrimony.databinding.FragmentSignUpBinding;
 import keer.matrimony.models.data;
 import keer.matrimony.other.ImageUpload;
 import keer.matrimony.ui.Activitys.MainActivity;
+import keer.matrimony.utils.onBoardingList;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -120,19 +121,13 @@ public class SignUpFragment extends Fragment {
                 binding.birthDate.setEnabled(true);
             }
         });
-//        subcast status
-        String[] subcast= {
-                "Select Subcast" , "नमचूड़िया " , "वाण्या" , "दायमा " , "राठौर  ","आकड़ा  ","वामण ","गाडरी",
-                "उवाड  " , "नायर " , "लोहरया  " , "हिकडया  ","जाट   ","सोलंकी  ","ब्यल्छा ",
-                "माली  " , "रात्या " , "भलंग  " , "टोक "
-        };
-        ArrayAdapter<String> subcastAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, subcast);
+        ArrayAdapter<String> subcastAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.subcast);
         binding.subcast.setAdapter(subcastAdapter);
         binding.subcast.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    mSubcast = subcast[position];
+                    mSubcast = onBoardingList.subcast[position];
                 }
             }
 
@@ -142,16 +137,14 @@ public class SignUpFragment extends Fragment {
             }
         });
 //        country status
-        String[] country= {
-                "Select Country" , "India"
-        };
-        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, country);
+
+        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.country);
         binding.country.setAdapter(countryAdapter);
         binding.country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    mCountry = country[position];
+                    mCountry = onBoardingList.country[position];
                 }
             }
 
@@ -161,16 +154,14 @@ public class SignUpFragment extends Fragment {
             }
         });
         //        country status
-        String[] genderAray= {
-                "Select Gender" , "Male" , "Female"
-        };
-        ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, genderAray);
+
+        ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.genderAray);
         binding.gender.setAdapter(genderAdapter);
         binding.gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    mGender = genderAray[position];
+                    mGender = onBoardingList.genderAray[position];
                 }
             }
 
@@ -180,49 +171,14 @@ public class SignUpFragment extends Fragment {
             }
         });
 //        state status
-        String[] state = {"Select State" ,  "Andhra Pradesh",
-                "Arunachal Pradesh",
-                "Assam",
-                "Bihar",
-                "Chhattisgarh",
-                "Goa",
-                "Gujarat",
-                "Haryana",
-                "Himachal Pradesh",
-                "Jammu and Kashmir",
-                "Jharkhand",
-                "Karnataka",
-                "Kerala",
-                "Madhya Pradesh",
-                "Maharashtra",
-                "Manipur",
-                "Meghalaya",
-                "Mizoram",
-                "Nagaland",
-                "Odisha",
-                "Punjab",
-                "Rajasthan",
-                "Sikkim",
-                "Tamil Nadu",
-                "Telangana",
-                "Tripura",
-                "Uttarakhand",
-                "Uttar Pradesh",
-                "West Bengal",
-                "Andaman and Nicobar Islands",
-                "Chandigarh",
-                "Dadra and Nagar Haveli",
-                "Daman and Diu",
-                "Delhi",
-                "Lakshadweep",
-                "Puducherry" };
-        ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, state);
+
+        ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.state);
         binding.state.setAdapter(stateAdapter);
         binding.state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    mState = state[position];
+                    mState = onBoardingList.state[position];
                 }
             }
 

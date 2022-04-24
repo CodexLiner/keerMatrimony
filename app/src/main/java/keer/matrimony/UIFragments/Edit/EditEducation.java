@@ -25,6 +25,7 @@ import keer.matrimony.databinding.FragmentEditEducationBinding;
 import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.ui.Activitys.HomeActivity;
 import keer.matrimony.ui.Activitys.MainActivity;
+import keer.matrimony.utils.onBoardingList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,16 +85,13 @@ public class EditEducation extends Fragment {
         Prof = binding.occupationDetails.getText().toString();
         EduD = binding.educationDetails.getText().toString();
 //        heightAdapter
-        String[] Education= {
-                "Education Details" , "High School" , "Higher Secondary " , "Graduate" , "Post Graduate"
-        };
-        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, Education);
+        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.Education);
         binding.Education.setAdapter(heightAdapter);
         binding.Education.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    Edu = Education[position];
+                    Edu = onBoardingList.Education[position];
                 }
             }
             @Override
@@ -102,16 +100,13 @@ public class EditEducation extends Fragment {
             }
         });
 //        martial status
-        String[] maritalStatus= {
-                "Occupation" , "Student" , "Farmer" , "Government Employee" , "Self Employed" , "Business"
-        };
-        ArrayAdapter<String> maritalStatusAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, maritalStatus);
+        ArrayAdapter<String> maritalStatusAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.maritalStatus);
         binding.occupation.setAdapter(maritalStatusAdapter);
         binding.occupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    Ocu = maritalStatus[position];
+                    Ocu = onBoardingList.maritalStatus[position];
                 }
             }
 
@@ -121,16 +116,13 @@ public class EditEducation extends Fragment {
             }
         });
 //        complexion status
-        String[] complexion= {
-                "Occupation Type" , "Bakery work" , "Oil extraction" , "NGO service"
-        };
-        ArrayAdapter<String> complexionAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, complexion);
+        ArrayAdapter<String> complexionAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.complexion);
         binding.profession.setAdapter(complexionAdapter);
         binding.profession.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    OcuT = complexion[position];
+                    OcuT = onBoardingList.complexion[position];
                 }
             }
 
@@ -140,16 +132,13 @@ public class EditEducation extends Fragment {
             }
         });
 //        diet status
-        String[] diet= {
-                "Annual Income" , "1 lacs / 1 लाख " , "2 to 5 lacs / 2 से 5 लाख " , "5 to 10 lacs / 5 से 10 लाख "
-        };
-        ArrayAdapter<String> dietArray = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, diet);
+        ArrayAdapter<String> dietArray = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.diet);
         binding.annualIncome.setAdapter(dietArray);
         binding.annualIncome.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    Annual = diet[position];
+                    Annual = onBoardingList.diet[position];
                 }
             }
 

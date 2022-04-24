@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import keer.matrimony.R;
 import keer.matrimony.UIFragments.onBoarding.ContactInformation;
@@ -33,6 +34,7 @@ import keer.matrimony.databinding.FragmentReligiuosInformationBinding;
 import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.ui.Activitys.HomeActivity;
 import keer.matrimony.ui.Activitys.MainActivity;
+import keer.matrimony.utils.onBoardingList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -129,16 +131,13 @@ public class EditReligion extends Fragment {
             }
         });
 //        mother tongue status
-        String[] maritalStatus= {
-                "Mother tongue" , "hindi / हिंदी" , "English / अंग्रेजी" , "Urdu / उर्दू"
-        };
-        ArrayAdapter<String> maritalStatusAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, maritalStatus);
+        ArrayAdapter<String> maritalStatusAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.motherTongue);
         binding.motherTongue.setAdapter(maritalStatusAdapter);
         binding.motherTongue.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    mTongue = maritalStatus[position];
+                    mTongue = onBoardingList.motherTongue[position];
                 }
             }
 
@@ -149,18 +148,14 @@ public class EditReligion extends Fragment {
         });
 
 //        Zodiac signs
-        String[] ZodiacSigns= {
-                "Zodiac Sign" , "Aries / मेष" , "Taurus / वृषभ" , "Gemini / मिथुन","Cancer / कर्क"
-                , "Leo / सिंह" , "Virgo / कन्या","Libra / तुला" , "Scorpius / वृश्चिक" , "Sagittarius / धनु",
-                "Capricornus / मकर" , "Aquarius / कुंभ" , "Pisces / मीन"
-        };
-        ArrayAdapter<String> zodiac = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, ZodiacSigns);
+
+        ArrayAdapter<String> zodiac = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.ZodiacSigns);
         binding.zodiac.setAdapter(zodiac);
         binding.zodiac.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    ZodiacSign = ZodiacSigns[position];
+                    ZodiacSign = onBoardingList.ZodiacSigns[position];
                 }
             }
 
@@ -170,16 +165,13 @@ public class EditReligion extends Fragment {
             }
         });
 //        Manglik Types
-        String[] manglik= {
-                "Manglik Type" , "Non Manglik" , "Manglik"
-        };
-        ArrayAdapter<String> manglikAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, manglik);
+        ArrayAdapter<String> manglikAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.manglik);
         binding.manglik.setAdapter(manglikAdapter);
         binding.manglik.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    ManglikType = manglik[position];
+                    ManglikType = onBoardingList.manglik[position];
                 }
             }
 
@@ -215,24 +207,24 @@ public class EditReligion extends Fragment {
                 binding.birthPlace.setText(CONSTANTS.RELIGIOUSDETAIL.getBirth_place());
             }
             if (CONSTANTS.RELIGIOUSDETAIL.getMother_tongue()!=null){
-                for (int i = 0; i < maritalStatus.length; i++) {
-                    Log.d("TAG", "onCreateView: mt "+CONSTANTS.RELIGIOUSDETAIL.getMother_tongue()+"  ->"+maritalStatus[i]);
-                    if (CONSTANTS.RELIGIOUSDETAIL.getMother_tongue()!=null && CONSTANTS.RELIGIOUSDETAIL.getMother_tongue().equalsIgnoreCase(maritalStatus[i])){
+                for (int i = 0; i < onBoardingList.motherTongue.length; i++) {
+                    Log.d("TAG", "onCreateView: mt "+CONSTANTS.RELIGIOUSDETAIL.getMother_tongue()+"  ->"+onBoardingList.motherTongue[i]);
+                    if (CONSTANTS.RELIGIOUSDETAIL.getMother_tongue()!=null && CONSTANTS.RELIGIOUSDETAIL.getMother_tongue().equalsIgnoreCase(onBoardingList.motherTongue[i])){
                         Log.d("TAG", "onCreateView: mt ");
                         binding.motherTongue.setSelection(i);
                     }
                 }
             }
             if (CONSTANTS.RELIGIOUSDETAIL.getZodiac()!=null){
-                for (int i = 0; i < ZodiacSigns.length; i++) {
-                    if (CONSTANTS.RELIGIOUSDETAIL.getZodiac()!=null && CONSTANTS.RELIGIOUSDETAIL.getZodiac().trim().equalsIgnoreCase(ZodiacSigns[i])){
+                for (int i = 0; i < onBoardingList.ZodiacSigns.length; i++) {
+                    if (CONSTANTS.RELIGIOUSDETAIL.getZodiac()!=null && CONSTANTS.RELIGIOUSDETAIL.getZodiac().trim().equalsIgnoreCase(onBoardingList.ZodiacSigns[i])){
                         binding.zodiac.setSelection(i);
                     }
                 }
             }
             if (CONSTANTS.RELIGIOUSDETAIL.getManglic()!=null){
-                for (int i = 0; i < manglik.length; i++) {
-                    if (CONSTANTS.RELIGIOUSDETAIL.getManglic()!=null && CONSTANTS.RELIGIOUSDETAIL.getManglic().trim().equals(manglik[i])){
+                for (int i = 0; i < onBoardingList.manglik.length; i++) {
+                    if (CONSTANTS.RELIGIOUSDETAIL.getManglic()!=null && CONSTANTS.RELIGIOUSDETAIL.getManglic().trim().equals(onBoardingList.manglik[i])){
                         binding.manglik.setSelection(i);
                     }
                 }
@@ -284,14 +276,10 @@ public class EditReligion extends Fragment {
                 map.put("nakshtra" , Nakshatra);
                 userDatabaseHelper db = new userDatabaseHelper(getContext());
                 userDatabaseModel model = db .getUser(0);
-                ((HomeActivity) getActivity()).setPersonalDetails(map , CONSTANTS.RELIGIOUS , model.getId());
-                getActivity().onBackPressed();
+                ((HomeActivity) requireActivity()).setPersonalDetails(map , CONSTANTS.RELIGIOUS , model.getId());
+                requireActivity().onBackPressed();
                 Toast.makeText(getActivity(), "Details Updated Successfully", Toast.LENGTH_SHORT).show();
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                ContactInformation c = new ContactInformation();
-//                transaction.replace(R.id.ContainerMain , c);
-//                transaction.addToBackStack(null);
-//                transaction.commit();
+
             }
         });
         return binding.getRoot();

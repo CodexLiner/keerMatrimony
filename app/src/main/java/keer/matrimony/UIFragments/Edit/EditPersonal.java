@@ -26,6 +26,7 @@ import keer.matrimony.databinding.FragmentPersonalDetailsBinding;
 import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.ui.Activitys.HomeActivity;
 import keer.matrimony.ui.Activitys.MainActivity;
+import keer.matrimony.utils.onBoardingList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,14 +85,14 @@ public class EditPersonal extends Fragment {
         ((HomeActivity) requireActivity()).hide(View.INVISIBLE);
         Weight = binding.weight.getText().toString();
 //        heightAdapter
-        String[] heightArray = { "Height", "5.0 feet", "5.5 feet", "6.0 feet", "6.5 feet"};
-        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, heightArray);
+
+        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.heightArray);
         binding.height.setAdapter(heightAdapter);
         binding.height.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    Height = heightArray[position];
+                    Height = onBoardingList.heightArray[position];
                 }
             }
             @Override
@@ -100,16 +101,13 @@ public class EditPersonal extends Fragment {
             }
         });
 //        martial status
-        String[] maritalStatus= {
-                "Marital Status" , "Married" , "UnMarried" , "Divorced"
-        };
-        ArrayAdapter<String> maritalStatusAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, maritalStatus);
+        ArrayAdapter<String> maritalStatusAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.maritalStatus);
         binding.maritalStatus.setAdapter(maritalStatusAdapter);
         binding.maritalStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    mStatus = maritalStatus[position];
+                    mStatus = onBoardingList.maritalStatus[position];
                 }
             }
 
@@ -119,16 +117,13 @@ public class EditPersonal extends Fragment {
             }
         });
 //        complexion status
-        String[] complexion= {
-                "Complexion Type" , "Extremely fair skin" , "Fair skin" , "Medium skin" , "Olive skin" , " Brown skin" , "Black skin"
-        };
-        ArrayAdapter<String> complexionAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, complexion);
+        ArrayAdapter<String> complexionAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.complexion);
         binding.complextion.setAdapter(complexionAdapter);
         binding.complextion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    cStatus = complexion[position];
+                    cStatus = onBoardingList.complexion[position];
                 }
             }
 
@@ -138,16 +133,13 @@ public class EditPersonal extends Fragment {
             }
         });
 //        diet status
-        String[] diet= {
-                "Diet Status" , "vegetarians " , "non-vegetarians" , "Flexitarian "
-        };
-        ArrayAdapter<String> dietArray = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, diet);
+        ArrayAdapter<String> dietArray = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.diet);
         binding.diet.setAdapter(dietArray);
         binding.diet.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    Diet = diet[position];
+                    Diet = onBoardingList.diet[position];
                 }
             }
 
@@ -157,17 +149,13 @@ public class EditPersonal extends Fragment {
             }
         });
 //        blood Group
-        String[] bloodGroup= {
-                "Blood Group" , "A RhD positive (A+)" , "A RhD negative (A-)" , "B RhD positive (B+)" , "B RhD positive (B+)",
-                "O RhD positive (O+)","O RhD negative (O-)","AB RhD positive (AB+)","AB RhD negative (AB-)",
-        };
-        ArrayAdapter<String> bloodArray = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, bloodGroup);
+        ArrayAdapter<String> bloodArray = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.bloodGroup);
         binding.bloodGroup.setAdapter(bloodArray);
         binding.bloodGroup.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    bGroup = bloodGroup[position];
+                    bGroup = onBoardingList.bloodGroup[position];
                 }
             }
 
@@ -177,16 +165,13 @@ public class EditPersonal extends Fragment {
             }
         });
 //        disAbility status
-        String[] disAbility= {
-                "Disability" , "Blindness." , "Handicap" , "Cerebral Palsy"
-        };
-        ArrayAdapter<String> disAbilityAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, disAbility);
+        ArrayAdapter<String> disAbilityAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.disAbility);
         binding.disAbility.setAdapter(disAbilityAdapter);
         binding.disAbility.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    Disabilty = disAbility[position];
+                    Disabilty = onBoardingList.disAbility[position];
                 }
             }
 
@@ -200,28 +185,28 @@ public class EditPersonal extends Fragment {
             if (CONSTANTS.PERSONALDETAIL.getWeight()!=null){
                 binding.weight.setText(CONSTANTS.PERSONALDETAIL.getWeight());
             }
-            for (int i = 0; i < heightArray.length; i++) {
-                if (CONSTANTS.PERSONALDETAIL.getHeight()!=null && CONSTANTS.PERSONALDETAIL.getHeight().equals(heightArray[i])){
+            for (int i = 0; i < onBoardingList.heightArray.length; i++) {
+                if (CONSTANTS.PERSONALDETAIL.getHeight()!=null && CONSTANTS.PERSONALDETAIL.getHeight().equals(onBoardingList.heightArray[i])){
                     binding.height.setSelection(i);
                 }
             }
-            for (int i = 0; i < maritalStatus.length; i++) {
-                if (CONSTANTS.PERSONALDETAIL.getMaretial_status()!=null && CONSTANTS.PERSONALDETAIL.getMaretial_status().equals(maritalStatus[i])){
+            for (int i = 0; i < onBoardingList.maritalStatus.length; i++) {
+                if (CONSTANTS.PERSONALDETAIL.getMaretial_status()!=null && CONSTANTS.PERSONALDETAIL.getMaretial_status().equals(onBoardingList.maritalStatus[i])){
                     binding.maritalStatus.setSelection(i);
                 }
             }
-            for (int i = 0; i < complexion.length; i++) {
-                if (CONSTANTS.PERSONALDETAIL.getComplexion()!=null && CONSTANTS.PERSONALDETAIL.getComplexion().equals(complexion[i])){
+            for (int i = 0; i < onBoardingList.complexion.length; i++) {
+                if (CONSTANTS.PERSONALDETAIL.getComplexion()!=null && CONSTANTS.PERSONALDETAIL.getComplexion().equals(onBoardingList.complexion[i])){
                     binding.complextion.setSelection(i);
                 }
             }
-            for (int i = 0; i < disAbility.length; i++) {
-                if (CONSTANTS.PERSONALDETAIL.getDisablity()!=null && CONSTANTS.PERSONALDETAIL.getDisablity().equals(disAbility[i])){
+            for (int i = 0; i < onBoardingList.disAbility.length; i++) {
+                if (CONSTANTS.PERSONALDETAIL.getDisablity()!=null && CONSTANTS.PERSONALDETAIL.getDisablity().equals(onBoardingList.disAbility[i])){
                     binding.disAbility.setSelection(i);
                 }
             }
-            for (int i = 0; i < bloodGroup.length; i++) {
-                if (CONSTANTS.PERSONALDETAIL.getBlood_group()!=null && CONSTANTS.PERSONALDETAIL.getBlood_group().equals(bloodGroup[i])){
+            for (int i = 0; i < onBoardingList.bloodGroup.length; i++) {
+                if (CONSTANTS.PERSONALDETAIL.getBlood_group()!=null && CONSTANTS.PERSONALDETAIL.getBlood_group().equals(onBoardingList.bloodGroup[i])){
                     binding.bloodGroup.setSelection(i);
                 }
             }
@@ -230,34 +215,34 @@ public class EditPersonal extends Fragment {
             @Override
             public void onClick(View v) {
                 Weight = binding.weight.getText().toString();
-//                if (TextUtils.isEmpty(Height)){
-//                    Toast.makeText(getActivity(), "Select Height", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (TextUtils.isEmpty(mStatus)){
-//                    Toast.makeText(getActivity(), "Select Marital Status", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (TextUtils.isEmpty(cStatus)){
-//                    Toast.makeText(getActivity(), "Select Complexion Status", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (TextUtils.isEmpty(Weight)){
-//                    Toast.makeText(getActivity(), "Select Weight", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (TextUtils.isEmpty(Diet)){
-//                    Toast.makeText(getActivity(), "Select Diet Type", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (TextUtils.isEmpty(Disabilty)){
-//                    Toast.makeText(getActivity(), "Select Disability", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (TextUtils.isEmpty(bGroup)){
-//                    Toast.makeText(getActivity(), "Select Blood Group", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
+                if (TextUtils.isEmpty(Height)){
+                    Toast.makeText(getActivity(), "Select Height", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(mStatus)){
+                    Toast.makeText(getActivity(), "Select Marital Status", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(cStatus)){
+                    Toast.makeText(getActivity(), "Select Complexion Status", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(Weight)){
+                    Toast.makeText(getActivity(), "Select Weight", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(Diet)){
+                    Toast.makeText(getActivity(), "Select Diet Type", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(Disabilty)){
+                    Toast.makeText(getActivity(), "Select Disability", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(bGroup)){
+                    Toast.makeText(getActivity(), "Select Blood Group", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Map<String , String> map = new HashMap<>();
                 map.put("height" , Height);
                 map.put("maretial_status" , mStatus);
@@ -271,11 +256,7 @@ public class EditPersonal extends Fragment {
                 ((HomeActivity) getActivity()).setPersonalDetails(map , CONSTANTS.PERSONALDETAILS , model.getId());
                 getActivity().onBackPressed();
                 Toast.makeText(getActivity(), "Details Updated Successfully", Toast.LENGTH_SHORT).show();
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                ReligiuosInformation w = new ReligiuosInformation();
-//                transaction.replace(R.id.ContainerMain , w);
-//                transaction.addToBackStack(null);
-//                transaction.commit();
+
             }
         });
         return binding.getRoot();
