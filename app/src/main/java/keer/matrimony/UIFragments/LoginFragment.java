@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.databinding.FragmentLoginBinding;
@@ -77,13 +78,13 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) throws NullPointerException{
       binding = FragmentLoginBinding.inflate(inflater);
       binding.signUpButton.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+              FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
               SignUpFragment educationDetails = new SignUpFragment();
               transaction.replace(R.id.ContainerMain , educationDetails);
               transaction.addToBackStack(null);

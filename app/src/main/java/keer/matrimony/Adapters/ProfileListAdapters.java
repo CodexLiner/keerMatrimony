@@ -3,9 +3,11 @@ package keer.matrimony.Adapters;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.StrictMode;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,9 +26,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -64,7 +69,6 @@ public class ProfileListAdapters extends RecyclerView.Adapter<ProfileListAdapter
         userDatabaseModel model;
         userDatabaseHelper db = new userDatabaseHelper(holder.ProfileImage.getContext());
         model = db.getUser(0);
-        Log.d("TAG", "onBindViewHolder: "+model.getId());
         final int position = i ;
         if (list.get(position).getFirst_name()!=null){
             String name = list.get(position).getFirst_name();
@@ -97,22 +101,27 @@ public class ProfileListAdapters extends RecyclerView.Adapter<ProfileListAdapter
         }
 //        Picasso.with(holder.ProfileImage.getContext()).load(Uri.parse((String) list.get(position))).into(holder.ProfileImage);
        if (list.get(position).getProfile()!=null){
-           Picasso.with(holder.ProfileImage.getContext()).load(Uri.parse((String) CONSTANTS.BASEURLPROFILE +  list.get(position).getProfile())).into(new Target() {
-               @Override
-               public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                   holder.ProfileImage.setBackground(new BitmapDrawable(bitmap));
-               }
-
-               @Override
-               public void onBitmapFailed(Drawable errorDrawable) {
-
-               }
-
-               @Override
-               public void onPrepareLoad(Drawable placeHolderDrawable) {
-                   holder.ProfileImage.setBackground(placeHolderDrawable);
-               }
-           });
+           Glide.with(holder.ProfileImage.getContext())
+                   .load(CONSTANTS.BASEURLPROFILE +
+                   list.get(position).getProfile())
+                   .placeholder(R.drawable.plaholder)
+                   .into(holder.ProfileImage);
+//           Picasso.with(holder.ProfileImage.getContext()).load(Uri.parse((String) CONSTANTS.BASEURLPROFILE +  list.get(position).getProfile())).into(new Target() {
+//               @Override
+//               public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+//                   holder.ProfileImage.setBackground(new BitmapDrawable(bitmap));
+//               }
+//
+//               @Override
+//               public void onBitmapFailed(Drawable errorDrawable) {
+//
+//               }
+//
+//               @Override
+//               public void onPrepareLoad(Drawable placeHolderDrawable) {
+//                   holder.ProfileImage.setBackground(placeHolderDrawable);
+//               }
+//           });
        }
 
 //       buttons

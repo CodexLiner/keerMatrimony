@@ -1,5 +1,6 @@
 package keer.matrimony.utils;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,11 +10,13 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -27,6 +30,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import keer.matrimony.R;
 import keer.matrimony.database.userDatabaseHelper;
 import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.models.data;
@@ -117,6 +121,14 @@ public class common {
 
             }
         });
+    }
+    public static void showProfile(String name , Context context){
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.image_viewer);
+        dialog.getWindow().setBackgroundDrawable(null);
+        ImageView profile = dialog.findViewById(R.id.profile);
+        Glide.with(context).load(name).placeholder(R.drawable.plaholder).into(profile);
+        dialog.show();
     }
 
 }

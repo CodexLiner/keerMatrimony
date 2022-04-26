@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "148211259481",
+    "project_id": "keer-matrimony",
+    "storage_bucket": "keer-matrimony.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148211259481:android:73c447a311ccdc3066b948",
+        "android_client_info": {
+          "package_name": "keer.matrimony"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "148211259481-9d2vn3d3qi7qlgbeia80r1ck44otkc5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzpcefKk-qNeXe7jodmLgeCc9G_jsMDCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "148211259481-9d2vn3d3qi7qlgbeia80r1ck44otkc5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -117,6 +118,10 @@ public class ProfileDetails extends Fragment {
         if (data.getProfile()!=null){
             Picasso.with(getContext()).load(CONSTANTS.BASEURLPROFILE + data.getProfile()).into(binding.profile);
         }
+        binding.profile.setOnClickListener((View p)->{
+            String name = CONSTANTS.BASEURLPROFILE + data.getProfile();
+            common.showProfile(name, p.getContext());
+        });
 
         return binding.getRoot();
     }

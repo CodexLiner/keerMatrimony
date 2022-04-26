@@ -28,6 +28,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import keer.matrimony.database.userDatabaseHelper;
+import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.R;
 import keer.matrimony.databinding.SearchFragmentBinding;
@@ -278,7 +280,14 @@ public class SearchFragment extends Fragment {
         String occupation = "&occupation="+mOcu;
         String profession = "&profession="+mPro;
         String anu_income = "&anu_income="+mInc;
-        String url = CONSTANTS.BASEURL + "get-profiles/2?page=1"+gender+min_age+max_age+subcaste+maretial_status+height_from+height_to+manglic+country+state+city+education+occupation+profession+anu_income;
+        userDatabaseModel model;
+        userDatabaseHelper db = new userDatabaseHelper(getContext());
+        model = db.getUser(0);
+        String id = "";
+        if (model!=null){
+            id = String.valueOf(model.getId());
+        }
+        String url = CONSTANTS.BASEURL + "get-profiles/"+id+"?page=1"+gender+min_age+max_age+subcaste+maretial_status+height_from+height_to+manglic+country+state+city+education+occupation+profession+anu_income;
         Gson gson = new Gson();
         Request request = new Request.Builder().url(url).get().build();
         new OkHttpClient().newCall(request).enqueue(new Callback() {

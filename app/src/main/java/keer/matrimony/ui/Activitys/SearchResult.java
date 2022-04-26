@@ -12,24 +12,31 @@ import keer.matrimony.R;
 import keer.matrimony.databinding.ActivitySearchResultBinding;
 import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.ui.dashboard.DashboardFragment;
+import keer.matrimony.utils.MyException;
 
 public class SearchResult extends AppCompatActivity {
     ActivitySearchResultBinding binding ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         binding = ActivitySearchResultBinding.inflate(getLayoutInflater());
-         ActionBar actionBar = getSupportActionBar();
-         getSupportFragmentManager()
-        .beginTransaction()
-        .replace(R.id.nav_host_fragment_activity_home, new DashboardFragment(CONSTANTS.SEARCHRESULT, this))
-        .commit();
+        try {
+            binding = ActivitySearchResultBinding.inflate(getLayoutInflater());
+            ActionBar actionBar = getSupportActionBar();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.nav_host_fragment_activity_home, new DashboardFragment(CONSTANTS.SEARCHRESULT, this))
+                    .commit();
 
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        if (getSupportActionBar()!=null){
-            getSupportActionBar().setTitle("Search Result's");
+            assert actionBar != null;
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            if (getSupportActionBar()!=null){
+                getSupportActionBar().setTitle("Search Result's");
+            }
+            setContentView(binding.getRoot());
+        }catch (Exception e){
+            Toast.makeText(this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
         }
-        setContentView(binding.getRoot());
+
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

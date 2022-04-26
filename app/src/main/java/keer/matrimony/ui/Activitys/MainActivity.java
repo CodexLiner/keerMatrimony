@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -18,6 +19,7 @@ import keer.matrimony.UIFragments.onBoarding.FamilyDetails;
 import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.R;
 import keer.matrimony.UIFragments.onBoarding.PersonalDetails;
+import keer.matrimony.utils.MyException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -31,12 +33,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.Theme_CustomeTheme);
-        setContentView(R.layout.activity_main);
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .add(R.id.ContainerMain, PersonalDetails.class, null)
-                .commit();
+        try {
+            setTheme(R.style.Theme_CustomeTheme);
+            setContentView(R.layout.activity_main);
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.ContainerMain, PersonalDetails.class, null)
+                    .commit();
+        }catch (Exception e){
+            Toast.makeText(this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+        }
     }
     public void setActionBarTitle(String title){
         if (getSupportActionBar()!=null){

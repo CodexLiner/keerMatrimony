@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -26,6 +28,7 @@ import keer.matrimony.R;
 import keer.matrimony.database.userDatabaseHelper;
 import keer.matrimony.database.userDatabaseModel;
 import keer.matrimony.models.data;
+import keer.matrimony.utils.MyException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -37,27 +40,32 @@ public class splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        userDatabaseHelper db = new userDatabaseHelper(this);
-        userDatabaseModel model = db.getUser(0);
-        if (model!=null){
-            getProfiles();
-        }
-
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-
-                if (model!=null){
-                    startActivity(new Intent(getApplicationContext() , HomeActivity.class));
-                    overridePendingTransition(0,0);
-                }else {
-                    startActivity(new Intent(getApplicationContext() , LoginActivity.class));
-                    overridePendingTransition(0,0);
-                }
-                finishAffinity();
+        try {
+            setContentView(R.layout.activity_splash);
+            userDatabaseHelper db = new userDatabaseHelper(this);
+            userDatabaseModel model = db.getUser(0);
+            FirebaseAnalytics.getInstance(this).setSessionTimeoutDuration(10000000);
+            if (model!=null){
+                getProfiles();
             }
-        },2000);
+
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+
+                    if (model!=null){
+                        startActivity(new Intent(getApplicationContext() , HomeActivity.class));
+                        overridePendingTransition(0,0);
+                    }else {
+                        startActivity(new Intent(getApplicationContext() , LoginActivity.class));
+                        overridePendingTransition(0,0);
+                    }
+                    finishAffinity();
+                }
+            },2000);
+        }catch (Exception e){
+            Toast.makeText(this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+        }
     }
     public void getProfiles(){
         Log.d("TAG", "getProfiles: splash");
@@ -91,4 +99,5 @@ public class splash extends AppCompatActivity {
             }
         });
     }
+
 }

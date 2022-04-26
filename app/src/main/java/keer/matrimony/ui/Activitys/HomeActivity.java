@@ -57,27 +57,29 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getProfiles();
-
-        binding = ActivityHomeBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        ActionBar actionBar = getSupportActionBar();
-        PermissionCheck();
-        // showing the back button in action bar
-        assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
-         navView = findViewById(R.id.nav_view);
-        navView.setSelectedItemId(R.id.navigation_dashboard);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_search , R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
+        try {
+            getProfiles();
+            binding = ActivityHomeBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+            ActionBar actionBar = getSupportActionBar();
+            PermissionCheck();
+            // showing the back button in action bar
+            assert actionBar != null;
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            navView = findViewById(R.id.nav_view);
+            navView.setSelectedItemId(R.id.navigation_dashboard);
+            // Passing each menu ID as a set of Ids because each
+            // menu should be considered as top level destinations.
+            AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                    R.id.navigation_home, R.id.navigation_search , R.id.navigation_dashboard, R.id.navigation_notifications)
+                    .build();
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
 
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
-
+            NavigationUI.setupWithNavController(binding.navView, navController);
+        }catch (Exception e){
+            Toast.makeText(this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+        }
     }
     public void setActionBarTitle(String title){
         if (getSupportActionBar()!=null){

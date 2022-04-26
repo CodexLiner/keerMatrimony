@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import keer.matrimony.R;
 import keer.matrimony.UIFragments.LoginFragment;
@@ -17,13 +18,16 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        PermissionCheck();
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .add(R.id.ContainerMain, LoginFragment.class, null)
-                .commit();
-
+        try {
+            setContentView(R.layout.activity_login);
+            PermissionCheck();
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.ContainerMain, LoginFragment.class, null)
+                    .commit();
+        }catch (Exception e){
+            Toast.makeText(this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+        }
     }
     private void PermissionCheck() {
         if (!PermisionClass.hasPermision(LoginActivity.this , PermisionClass.permisions)){

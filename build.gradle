@@ -6,6 +6,9 @@ buildscript {
         maven { url 'https://www.jitpack.io' }
         maven { url "https://jitpack.io" }
     }
+    dependencies {
+        classpath 'com.google.gms:google-services:4.3.10'
+    }
 }
 plugins {
     id 'com.android.application' version '7.1.1' apply false
