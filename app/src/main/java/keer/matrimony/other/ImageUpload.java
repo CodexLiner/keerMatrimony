@@ -23,7 +23,7 @@ import okhttp3.Response;
 public class ImageUpload extends AsyncTask<Void , Void , Void> {
     File file;
     int id ;
-    String type = "gallery";
+    String type = "profile";
 
     public ImageUpload(File file, int id) {
         this.file = file;
@@ -69,9 +69,10 @@ public class ImageUpload extends AsyncTask<Void , Void , Void> {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 try {
                     JSONObject jsonResponse = new JSONObject(response.body().string());
-                    Log.d("TAG", "onResponseImage: "+jsonResponse.toString());
+                    Log.d("TAG", "uploadImage: "+id+" "+jsonResponse.toString());
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.d("TAG", "uploadImage: "+e.toString());
+
                 }
 
             }

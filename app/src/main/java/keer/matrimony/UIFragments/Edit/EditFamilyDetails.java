@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import keer.matrimony.R;
 import keer.matrimony.UIFragments.onBoarding.PartnerPrefrences;
@@ -78,7 +79,8 @@ public class EditFamilyDetails extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentEditFamilyDetailsBinding.inflate(inflater);
         // Inflate the layout for this fragment
-        ((HomeActivity) getActivity()).setActionBarTitle("Edit Family Details");
+        ((HomeActivity) requireActivity()).setActionBarTitle("Edit Family Details");
+        ((HomeActivity) requireActivity()).hide(View.INVISIBLE);
         if (CONSTANTS.family!=null){
             familyDetails fd = CONSTANTS.family;
             binding.faherName.setText(fd.getFather_name());

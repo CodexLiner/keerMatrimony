@@ -44,6 +44,7 @@ import keer.matrimony.databinding.FragmentHomeBinding;
 import keer.matrimony.models.data;
 import keer.matrimony.ui.Activitys.HomeActivity;
 import keer.matrimony.ui.Activitys.SearchResult;
+import keer.matrimony.utils.onBoardingList;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -53,7 +54,7 @@ import okhttp3.Response;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    String gender , fromDate , toDate ;
+    String gender , fromDate = "0", toDate = "0";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         keer.matrimony.ui.home.HomeViewModel homeViewModel =
@@ -93,47 +94,44 @@ public class HomeFragment extends Fragment {
 
             }
         });
-       ArrayList<String> arr = new ArrayList<>(99);
-       arr.add("Select From Age");
-       ArrayList<String> arr2 = new ArrayList<>(99);
-        arr2.add("Select To Age");
-        for (int i = 0; i < 99; i++) {
-            arr.add(String.valueOf(i+1));
-            arr2.add(String.valueOf(i+1));
+        ArrayList<String> arr = new ArrayList<>(99);
+        final ArrayList<String>[] arr2 = new ArrayList[]{new ArrayList<>(99)};
+        arr.add("Select From Age");
+        arr2[0].add("Select To Age");
+        for (int i = 18; i < 100; i++) {
+            arr.add(String.valueOf(i));
+            arr2[0].add(String.valueOf(i));
         }
-        ArrayAdapter<String> toAdapater = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, arr2);
-        binding.toDate.setAdapter(toAdapater);
-        binding.toDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position!=0){
-                    toDate = arr.get(position);
-                }else {
-                    toDate = null;
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         ArrayAdapter<String> startAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, arr);
         binding.fromDate.setAdapter(startAdapter);
         binding.fromDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    fromDate = arr2.get(position);
-                }else {
-                    fromDate = null;
+                    fromDate = arr.get(position);
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
+
+        ArrayAdapter<String> toAdapater = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, arr2[0]);
+        binding.toDate.setAdapter(toAdapater);
+        binding.toDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position!=0){
+                    toDate = onBoardingList.toAge(fromDate).get(position);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         binding.buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,7 +197,7 @@ public class HomeFragment extends Fragment {
                     jsonResponse = new JSONObject(response.body().string());
                     if (jsonResponse.getBoolean("error")){
                         JSONObject finalJsonResponse = jsonResponse;
-                        getActivity().runOnUiThread(new Runnable() {
+                        requireActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 dialog.dismiss();

@@ -100,7 +100,7 @@ public class EditEducation extends Fragment {
             }
         });
 //        martial status
-        ArrayAdapter<String> maritalStatusAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.maritalStatus);
+        ArrayAdapter<String> maritalStatusAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.Occupation);
         binding.occupation.setAdapter(maritalStatusAdapter);
         binding.occupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -109,7 +109,6 @@ public class EditEducation extends Fragment {
                     Ocu = onBoardingList.maritalStatus[position];
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -125,14 +124,13 @@ public class EditEducation extends Fragment {
                     OcuT = onBoardingList.complexion[position];
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
 //        diet status
-        ArrayAdapter<String> dietArray = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.diet);
+        ArrayAdapter<String> dietArray = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.AnnualIncome);
         binding.annualIncome.setAdapter(dietArray);
         binding.annualIncome.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -164,10 +162,10 @@ public class EditEducation extends Fragment {
                     Toast.makeText(getActivity(), "Select Occupation", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(OcuT)){
-                    Toast.makeText(getActivity(), "Select Occupation Type", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                if (TextUtils.isEmpty(OcuT)){
+//                    Toast.makeText(getActivity(), "Select Occupation Type", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
                 if (TextUtils.isEmpty(Prof)){
                     Toast.makeText(getActivity(), "Enter Profession", Toast.LENGTH_SHORT).show();
                     return;
@@ -180,7 +178,7 @@ public class EditEducation extends Fragment {
                 map.put("edu" , Edu);
                 map.put("edu_detail" , EduD);
                 map.put("occupation" , Ocu);
-                map.put("profession" , OcuT);
+                map.put("profession" , null);
                 map.put("ocu_detail" , Prof);
                 map.put("anu_income" , Annual);
                 Log.d("TAG", "onResponseX: "+map.toString());
@@ -189,11 +187,6 @@ public class EditEducation extends Fragment {
                 ((HomeActivity) getActivity()).setPersonalDetails(map , CONSTANTS.EDUCATIONDETAILS , model.getId());
                 getActivity().onBackPressed();
                 Toast.makeText(getActivity(), "Details Updated Successfully", Toast.LENGTH_SHORT).show();
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                FamilyDetails educationDetails = new FamilyDetails();
-//                transaction.replace(R.id.ContainerMain , educationDetails);
-//                transaction.addToBackStack(null);
-//                transaction.commit();
             }
         });
         return binding.getRoot();

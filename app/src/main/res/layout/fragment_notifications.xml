@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment">
+    tools:context=".ui.profile.UserProfile">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -669,7 +669,7 @@
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Education Details"/>
+                        android:text="@string/school_college_name"/>
                     <TextView
                         android:id="@+id/educationDetails"
                         android:layout_weight="1"

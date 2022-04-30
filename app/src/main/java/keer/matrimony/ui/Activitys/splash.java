@@ -92,6 +92,8 @@ public class splash extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(response.body().string());
                     Type type = new TypeToken<List<data>>(){}.getType();
                     CONSTANTS.DATA = gson.fromJson(jsonResponse.getJSONObject("detail").optString("data"), type);
+                    CONSTANTS.nextPage = jsonResponse.optString("next_page_url").toString();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

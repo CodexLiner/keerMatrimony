@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import keer.matrimony.R;
 import keer.matrimony.UIFragments.onBoarding.ReligiuosInformation;
@@ -81,18 +82,18 @@ public class EditPersonal extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentEditPersonalBinding.inflate(inflater);
-        ((HomeActivity) getActivity()).setActionBarTitle("Edit Personal Profile Details");
+        ((HomeActivity) requireActivity()).setActionBarTitle("Edit Personal Profile Details");
         ((HomeActivity) requireActivity()).hide(View.INVISIBLE);
         Weight = binding.weight.getText().toString();
 //        heightAdapter
 
-        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.heightArray);
+        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.heightArray());
         binding.height.setAdapter(heightAdapter);
         binding.height.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    Height = onBoardingList.heightArray[position];
+                    Height = onBoardingList.heightArray().get(position);
                 }
             }
             @Override
@@ -185,8 +186,8 @@ public class EditPersonal extends Fragment {
             if (CONSTANTS.PERSONALDETAIL.getWeight()!=null){
                 binding.weight.setText(CONSTANTS.PERSONALDETAIL.getWeight());
             }
-            for (int i = 0; i < onBoardingList.heightArray.length; i++) {
-                if (CONSTANTS.PERSONALDETAIL.getHeight()!=null && CONSTANTS.PERSONALDETAIL.getHeight().equals(onBoardingList.heightArray[i])){
+            for (int i = 0; i < onBoardingList.heightArray().size(); i++) {
+                if (CONSTANTS.PERSONALDETAIL.getHeight()!=null && CONSTANTS.PERSONALDETAIL.getHeight().equals(onBoardingList.heightArray().get(i))){
                     binding.height.setSelection(i);
                 }
             }

@@ -79,7 +79,7 @@ public class SearchFragment extends Fragment {
         arr.add("Select From Age");
         ArrayList<String> arr2 = new ArrayList<>(99);
         arr2.add("Select To Age");
-        for (int i = 0; i < 99; i++) {
+        for (int i = 17; i < 99; i++) {
             arr.add(String.valueOf(i+1));
             arr2.add(String.valueOf(i+1));
         }
@@ -183,13 +183,13 @@ public class SearchFragment extends Fragment {
 
             }
         });
-        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.heightArray);
+        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.heightArray());
         binding.height.setAdapter(heightAdapter);
         binding.height.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    Height = onBoardingList.heightArray[position];
+                    Height = onBoardingList.heightArray().get(position);
                 }
             }
             @Override

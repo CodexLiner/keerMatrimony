@@ -43,6 +43,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.database.userDatabaseHelper;
@@ -51,6 +52,7 @@ import keer.matrimony.databinding.FragmentSignUpBinding;
 import keer.matrimony.models.data;
 import keer.matrimony.other.ImageUpload;
 import keer.matrimony.ui.Activitys.MainActivity;
+import keer.matrimony.utils.common;
 import keer.matrimony.utils.onBoardingList;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -287,20 +289,7 @@ public class SignUpFragment extends Fragment {
     }
     private void Register(Map<String , String> map) {
         Gson gson = new Gson();
-        Bitmap bm =  uriToBitmap(outputUri);
-        File file = new File(getActivity().getExternalCacheDir(), "keerProfile.jpg");
-        try {
-            boolean f = file.createNewFile();
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
-            byte[] bitmapdata = bos.toByteArray();
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(bitmapdata);
-            fos.flush();
-            fos.close();
-        }catch (Exception e){
-           e.printStackTrace();
-        }
+        Bitmap bm = common.uriToBitmap(outputUri , requireContext());
         if (map==null){
             return;
         }
@@ -334,11 +323,10 @@ public class SignUpFragment extends Fragment {
                                 userDatabaseHelper db = new userDatabaseHelper(getContext());
                                 db.insertUser(userData);
                                 userDatabaseModel model = db.getUser(0);
-                                ImageUpload imageUpload = new ImageUpload(file , model.getId());
-                                imageUpload.execute();
+                                common.uploadImage(bm, requireContext(), model.getId());
                                 Toast.makeText(getActivity(), "Register SuccessFully", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getContext() , MainActivity.class));
-                                getActivity().overridePendingTransition(0,0);
+                                requireActivity().overridePendingTransition(0,0);
                             }
                         }
                     });

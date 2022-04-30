@@ -171,6 +171,7 @@ public class ProfileListAdapters extends RecyclerView.Adapter<ProfileListAdapter
                 });
                 close2.setOnClickListener((View x)->{
                     dialog.dismiss();
+                    common.Verify(holder.ProfileImage.getContext() ,String.valueOf(model.getId()));
                 });
                 confirm.setOnClickListener((View call)->{
                     common.startCall(list.get(position).getMobile() , holder.ProfileImage.getContext());
@@ -182,23 +183,34 @@ public class ProfileListAdapters extends RecyclerView.Adapter<ProfileListAdapter
         holder.ProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (activity==null){
-                    Navigation.findNavController(v).navigate(R.id.action_navigation_dashboard_to_navigationDetails2);
-                    CONSTANTS.DATAs = list.get(position);
+                if (model.getStatus().equals("1")) {
+                    if (activity == null) {
+                        Navigation.findNavController(v).navigate(R.id.action_navigation_dashboard_to_navigationDetails2);
+                        CONSTANTS.DATAs = list.get(position);
+                    } else {
+                        ((FragmentActivity) v.getContext()).getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.nav_host_fragment_activity_home, new ProfileDetails(list.get(position), activity)).addToBackStack("dashboard")
+                                .commit();
+                        CONSTANTS.DATAs = list.get(position);
+                    }
                 }else {
-                ((FragmentActivity)v.getContext()).getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_home, new ProfileDetails( list.get(position) , activity)).addToBackStack("dashboard")
-                        .commit();
-                    CONSTANTS.DATAs = list.get(position);
+                    Dialog dialog = new Dialog(holder.callButton.getContext());
+                    dialog.setContentView(R.layout.call_dialog);
+                    WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
+                    layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    LinearLayout inActive = dialog.findViewById(R.id.inActive);
+                    layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    dialog.getWindow().setAttributes(layoutParams);
+                    dialog.getWindow().setBackgroundDrawable(null);
+                    inActive.setVisibility(View.VISIBLE);
+                    Button close = dialog.findViewById(R.id.buttonClose2);
+                    close.setOnClickListener((View x)->{
+                        dialog.dismiss();
+                        common.Verify(holder.ProfileImage.getContext() ,String.valueOf(model.getId()));
+                    });
+                    dialog.show();
                 }
-//                activity.getFragmentManager().beginTransaction().replace( R.id.navigation_home, new DashboardFragment()).commit();
-
-//                ((FragmentActivity)v.getContext()).getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.nav_host_fragment_activity_home, new ProfileDetails( list.get(position))).addToBackStack("dashboard")
-//                        .commit();
-              /*  ((HomeActivity) v.getContext()).getFragmentManager().beginTransaction().replace( R.id.navigation_home, new DashboardFragment()).commit();*/
             }
         });
     }

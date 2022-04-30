@@ -64,13 +64,13 @@ public class PersonalDetails extends Fragment {
         binding = FragmentPersonalDetailsBinding.inflate(inflater);
         Weight = binding.weight.getText().toString();
 //        heightAdapter
-        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.heightArray);
+        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.heightArray());
         binding.height.setAdapter(heightAdapter);
         binding.height.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    Height = onBoardingList.heightArray[position];
+                    Height = onBoardingList.heightArray().get(position);
                 }
             }
             @Override

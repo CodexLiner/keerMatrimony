@@ -69,7 +69,6 @@ public class EducationDetails extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ((MainActivity) getActivity()).setActionBarTitle("Education Details");
-
         binding = FragmentEducationDetailsBinding.inflate(inflater);
         Prof = binding.occupationDetails.getText().toString();
         EduD = binding.educationDetails.getText().toString();
@@ -172,7 +171,7 @@ public class EducationDetails extends Fragment {
                 map.put("edu" , Edu);
                 map.put("edu_detail" , EduD);
                 map.put("occupation" , Ocu);
-                map.put("profession" , OcuT);
+                map.put("profession" , null);
                 map.put("ocu_detail" , Prof);
                 map.put("anu_income" , Annual);
                 Log.d("TAG", "onResponseX: "+map.toString());

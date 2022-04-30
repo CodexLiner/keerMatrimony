@@ -1,5 +1,9 @@
 package keer.matrimony.utils;
 
+import android.util.Log;
+
+import java.util.ArrayList;
+
 public class onBoardingList {
 //  education fragment
     public static String[] Education= {
@@ -12,7 +16,18 @@ public class onBoardingList {
             "Annual Income" ,"1  to 50 thousand / 1 से 50 हजार",  "1 lacs / 1 लाख " , "2 to 5 lacs / 2 से 5 लाख " , "5 to 10 lacs / 5 से 10 लाख " ,  "10 to 50 lacs / 10 से 50 लाख"
     };
 //    personal fragment
-    public static String[] heightArray = { "Height", "5.0 feet", "5.5 feet", "6.0 feet", "6.5 feet"};
+//    public static String[] heightArray = { "Height", "5.0 feet", "5.5 feet", "6.0 feet", "6.5 feet"};
+    public static ArrayList<String> heightArray(){
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Select Height");
+        for (int i = 4; i <= 7; i++) {
+            for (int j = 0; j < 10; j+=2) {
+                String s = i+"."+j+" feet";
+                list.add(s);
+            }
+        }
+        return list;
+    }
     public static String[] maritalStatus= {
             "Marital Status" , "Married" , "UnMarried" , "Divorced"
     };
@@ -97,4 +112,18 @@ public class onBoardingList {
             , "Leo / सिंह " , "Virgo / कन्या   ","Libra / तुला   " , "Scorpius / वृश्चिक  " , "Sagittarius / धनु  ",
             "Capricornus / मकर    " , "Aquarius / कुंभ  " , "Pisces / मीन    "
     };
+    public  static ArrayList<String> toAge(String s) {
+        Log.d("TAG", "toAge: "+s);
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Select To Age");
+        if (s.equals("0")){
+            list.add("First Select From Age");
+            return list;
+        }else {
+            for (int i = Integer.parseInt(s); i < 100; i++) {
+                list.add(String.valueOf(i));
+            }
+            return list;
+        }
+    }
 }

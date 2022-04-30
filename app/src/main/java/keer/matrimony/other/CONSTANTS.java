@@ -20,7 +20,7 @@ public class CONSTANTS {
     public static final String FAMILYDETAILS = "update-family-details/";
     public static final String CALLMESSAGE = "Are you sure want to call on this number ?<br>Click Confirm to Call ";
     public static  education EDUCATIONDETAILSEDIT ;
-    public static  ContactDetails CONTACTDETAILS ;
+    public static ContactDetails CONTACTDETAILS;
     public static  religious_details RELIGIOUSDETAIL;
     public static  personal_details PERSONALDETAIL ;
     public static List<data> SEARCHRESULT ;
@@ -28,4 +28,5 @@ public class CONSTANTS {
     public static data DATAs ;
     public static String mediaType = "application/json; charset=utf-8";
     public static familyDetails family;
+    public static String nextPage;
 }

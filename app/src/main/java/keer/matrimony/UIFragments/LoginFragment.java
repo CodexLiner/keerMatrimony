@@ -150,7 +150,8 @@ public class LoginFragment extends Fragment {
                                 userDatabaseModel model = db.getUser(0);
                                 Toast.makeText(getActivity(), "Login Success", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getContext() , HomeActivity.class));
-                                getActivity().overridePendingTransition(0,0);
+                                requireActivity().overridePendingTransition(0,0);
+                                requireActivity().finishAffinity();
 
                             }
 

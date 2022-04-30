@@ -84,10 +84,11 @@ public class common {
             fos.flush();
             fos.close();
         }catch (Exception e){
-            e.printStackTrace();
+            Log.d("TAG", "uploadImage: "+e);
         }
         ImageUpload imageUpload = new ImageUpload(file , id);
         imageUpload.execute();
+        Verify(context , String.valueOf(id));
     }
     public static void Verify(Context context , String id) {
         Gson gson = new Gson();

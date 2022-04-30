@@ -1,4 +1,4 @@
-package keer.matrimony.ui.notifications;
+package keer.matrimony.ui.profile;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

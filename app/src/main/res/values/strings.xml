@@ -8,4 +8,10 @@
     <string name="title_notifications">Profile</string>
     <string name="place_of_birth">Place Of Birth</string>
     <string name="under_review"><![CDATA[Your profile has been submitted & will be reviewed by our team. You will be notified if any extra information is needed]]></string>
+    <string name="describe_occupation">Describe Occupation/व्यवसाय विवरण</string>
+    <string name="school_college_name">School/College Name</string>
+    <string name="father_contact_number">Father Contact Number</string>
+    <string name="whatsapp_number">Whatsapp Number</string>
+    <string name="present_adddress">Present Adddress</string>
+    <string name="permanent_address">Permanent Address</string>
 </resources>

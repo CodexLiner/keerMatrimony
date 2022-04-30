@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="keer.matrimony.ui.notifications.NotificationsFragment"
+        android:name="keer.matrimony.ui.profile.UserProfile"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" >
         <action

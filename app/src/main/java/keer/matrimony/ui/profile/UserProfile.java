@@ -1,4 +1,4 @@
-package keer.matrimony.ui.notifications;
+package keer.matrimony.ui.profile;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -28,19 +26,11 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.List;
-import java.util.Objects;
 
 import keer.matrimony.R;
 import keer.matrimony.database.userDatabaseHelper;
@@ -53,7 +43,6 @@ import keer.matrimony.models.familyDetails;
 import keer.matrimony.models.personal_details;
 import keer.matrimony.models.religious_details;
 import keer.matrimony.other.CONSTANTS;
-import keer.matrimony.other.ImageUpload;
 import keer.matrimony.ui.Activitys.HomeActivity;
 import keer.matrimony.ui.Activitys.LoginActivity;
 import keer.matrimony.utils.common;
@@ -63,7 +52,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class NotificationsFragment extends Fragment {
+public class UserProfile extends Fragment {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     religious_details rd;
@@ -85,6 +74,8 @@ public class NotificationsFragment extends Fragment {
 
         ((HomeActivity) requireActivity()).setActionBarTitle("Your Profile");
         ((HomeActivity) requireActivity()).hide(View.VISIBLE);
+        userDatabaseHelper db = new userDatabaseHelper(getContext());
+        userDatabaseModel model = db .getUser(0);
 
         sharedPreferences = requireContext().getSharedPreferences("profile" , Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -185,17 +176,19 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onRefresh() {
                 getProfiles();
+                common.Verify(requireContext() , String.valueOf(model.getId()));
                 binding.swipe.setRefreshing(true);
             }
         });
         //getProfiles();
-        userDatabaseHelper db = new userDatabaseHelper(getContext());
-        userDatabaseModel model = db .getUser(0);
+
         Log.d("TAG", "onCreateView: "+model.toString());
         if (model.getPartner_preference()!=null){
             binding.partnerPref.setText(model.getPartner_preference());
         }
-        setProfile(model.getProfile());
+        if (model.getProfile()!=null){
+           setProfile(model.getProfile());
+        }
         binding.dob.setText(model.getDob());
         binding.dob2.setText(model.getDob());
         String name = model.getFirst_name()+" "+model.getLast_name();
@@ -247,11 +240,7 @@ public class NotificationsFragment extends Fragment {
     }
 
     private void setProfile(String profile) {
-       try {
-           File file = new File(requireContext().getExternalCacheDir(), "keerProfile.jpg");
-           binding.profile.setImageURI(Uri.parse(file.getPath()));
-       }catch (Exception ignored){}
-
+        Glide.with(requireContext()).load(CONSTANTS.BASEURLPROFILE+profile).placeholder(R.drawable.plaholder).into(binding.profile);
     }
 
     @Override
@@ -288,11 +277,18 @@ public class NotificationsFragment extends Fragment {
                     fd  = gson.fromJson(jsonResponse.optString("family_details"), familyDetails.class);
                     ed  = gson.fromJson(jsonResponse.optString("education"), education.class);
                     cd  = gson.fromJson(jsonResponse.optString("contact_details"), ContactDetails.class);
-
-                    getActivity().runOnUiThread(new Runnable() {
+                    userDatabaseHelper db = new userDatabaseHelper(requireContext());
+                    userDatabaseModel model = db.getUser(0);
+                    requireActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             binding.swipe.setRefreshing(false);
+                            if (model.getPartner_preference()!=null){
+                                binding.partnerPref.setText(model.getPartner_preference());
+                            }
+                            if (model.getProfile()!=null){
+                                setProfile(model.getProfile());
+                            }
                             if (cd!=null){
                                 Gson gson = new Gson();
                                 String json = gson.toJson(cd);
@@ -383,7 +379,7 @@ public class NotificationsFragment extends Fragment {
 
                     });
 
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     Log.d("TAG", "onResponseXx: "+e);
                     e.printStackTrace();
                 }
@@ -412,6 +408,6 @@ public class NotificationsFragment extends Fragment {
                             }
                         }
                     });
-//                    Crop.of(uri, outputUri).asSquare().start(getActivity());
+//                Crop.of(uri, outputUri).asSquare().start(getActivity());
  }});
 }
