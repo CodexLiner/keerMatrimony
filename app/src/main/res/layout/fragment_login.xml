@@ -136,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_shape_secondary"
                     android:textColor="@color/black"
-                    android:text="Create One"/>
+                    android:text="Sign Up"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

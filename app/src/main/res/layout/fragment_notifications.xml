@@ -1010,6 +1010,19 @@
                         android:text="-"/>
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+                android:layout_margin="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:textColor="@color/white"
+                    android:id="@+id/logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Log Out"
+                    android:background="@drawable/button_shape_primary"/>
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

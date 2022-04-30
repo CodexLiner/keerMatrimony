@@ -36,6 +36,7 @@ import keer.matrimony.databinding.SearchFragmentBinding;
 import keer.matrimony.models.data;
 import keer.matrimony.ui.Activitys.HomeActivity;
 import keer.matrimony.ui.Activitys.SearchResult;
+import keer.matrimony.utils.onBoardingList;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -119,18 +120,13 @@ public class SearchFragment extends Fragment {
 
 
         //        subcast status
-        String[] subcast= {
-                "Select Subcast" , "नमचूड़िया " , "वाण्या" , "दायमा " , "राठौर  ","आकड़ा  ","वामण ","गाडरी",
-                "उवाड  " , "नायर " , "लोहरया  " , "हिकडया  ","जाट   ","सोलंकी  ","ब्यल्छा ",
-                "माली  " , "रात्या " , "भलंग  " , "टोक "
-        };
-        ArrayAdapter<String> subcastAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, subcast);
+        ArrayAdapter<String> subcastAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.subcast);
         binding.subcast.setAdapter(subcastAdapter);
         binding.subcast.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    mSubcast = subcast[position];
+                    mSubcast = onBoardingList.subcast[position];
                 }
             }
 
@@ -139,18 +135,13 @@ public class SearchFragment extends Fragment {
 
             }
         });
-
-
-        String[] country= {
-                "Select Country" , "India"
-        };
-        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, country);
+        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.country);
         binding.country.setAdapter(countryAdapter);
         binding.country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    mCountry = country[position];
+                    mCountry = onBoardingList.country[position];
                 }
             }
 
@@ -160,49 +151,13 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        String[] state = {"Select State" ,  "Andhra Pradesh",
-                "Arunachal Pradesh",
-                "Assam",
-                "Bihar",
-                "Chhattisgarh",
-                "Goa",
-                "Gujarat",
-                "Haryana",
-                "Himachal Pradesh",
-                "Jammu and Kashmir",
-                "Jharkhand",
-                "Karnataka",
-                "Kerala",
-                "Madhya Pradesh",
-                "Maharashtra",
-                "Manipur",
-                "Meghalaya",
-                "Mizoram",
-                "Nagaland",
-                "Odisha",
-                "Punjab",
-                "Rajasthan",
-                "Sikkim",
-                "Tamil Nadu",
-                "Telangana",
-                "Tripura",
-                "Uttarakhand",
-                "Uttar Pradesh",
-                "West Bengal",
-                "Andaman and Nicobar Islands",
-                "Chandigarh",
-                "Dadra and Nagar Haveli",
-                "Daman and Diu",
-                "Delhi",
-                "Lakshadweep",
-                "Puducherry" };
-        ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, state);
+        ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.state);
         binding.state.setAdapter(stateAdapter);
         binding.state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    mState = state[position];
+                    mState = onBoardingList.state[position];
                 }
             }
 
@@ -213,16 +168,13 @@ public class SearchFragment extends Fragment {
         });
 
         //        martial status
-        String[] maritalStatus= {
-                "Marital Status" , "Married" , "UnMarried" , "Divorced"
-        };
-        ArrayAdapter<String> maritalStatusAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, maritalStatus);
+        ArrayAdapter<String> maritalStatusAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.maritalStatus);
         binding.maritalStatus.setAdapter(maritalStatusAdapter);
         binding.maritalStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    mStatus = maritalStatus[position];
+                    mStatus = onBoardingList.maritalStatus[position];
                 }
             }
 
@@ -231,15 +183,13 @@ public class SearchFragment extends Fragment {
 
             }
         });
-
-        String[] heightArray = { "Height", "5.0 feet", "5.5 feet", "6.0 feet", "6.5 feet"};
-        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, heightArray);
+        ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, onBoardingList.heightArray);
         binding.height.setAdapter(heightAdapter);
         binding.height.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position!=0){
-                    Height = heightArray[position];
+                    Height = onBoardingList.heightArray[position];
                 }
             }
             @Override

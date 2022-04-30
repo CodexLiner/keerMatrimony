@@ -20,6 +20,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:padding="0dp"
+            android:src="@drawable/plaholder"
             android:scaleType="fitXY" />
         <LinearLayout
             android:visibility="invisible"

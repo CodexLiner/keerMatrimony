@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Objects;
 
 import keer.matrimony.R;
 import keer.matrimony.database.userDatabaseHelper;
@@ -91,15 +93,15 @@ public class ProfileDetails extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         data = CONSTANTS.DATAs;
         binding = FragmentProfileDetailsBinding.inflate(inflater);
         // Inflate the layout for this fragment
        if (activity==null){
-           ((HomeActivity) getActivity()).hide(View.INVISIBLE);
-           ((HomeActivity) getActivity()).setActionBarTitle(data.getFirst_name()+" "+data.getLast_name());
+           ((HomeActivity) requireActivity()).hide(View.INVISIBLE);
+           ((HomeActivity) requireActivity()).setActionBarTitle(data.getFirst_name()+" "+data.getLast_name());
        }else {
-           ((SearchResult) getActivity()).setActionBarTitle(data.getFirst_name()+" "+data.getLast_name());
+           ((SearchResult) requireActivity()).setActionBarTitle(data.getFirst_name()+" "+data.getLast_name());
        }
         if (data.getDob()!=null){
             getProfiles(data.getId());
@@ -116,7 +118,7 @@ public class ProfileDetails extends Fragment {
             binding.weight.setText(data.getHeight());
         }
         if (data.getProfile()!=null){
-            Picasso.with(getContext()).load(CONSTANTS.BASEURLPROFILE + data.getProfile()).into(binding.profile);
+            Glide.with(requireContext()).load(CONSTANTS.BASEURLPROFILE + data.getProfile()).placeholder(R.drawable.plaholder).into(binding.profile);
         }
         binding.profile.setOnClickListener((View p)->{
             String name = CONSTANTS.BASEURLPROFILE + data.getProfile();

@@ -11,8 +11,7 @@ import android.widget.Toast;
 import keer.matrimony.R;
 import keer.matrimony.databinding.ActivitySearchResultBinding;
 import keer.matrimony.other.CONSTANTS;
-import keer.matrimony.ui.dashboard.DashboardFragment;
-import keer.matrimony.utils.MyException;
+import keer.matrimony.ui.list.ListFragment;
 
 public class SearchResult extends AppCompatActivity {
     ActivitySearchResultBinding binding ;
@@ -24,7 +23,7 @@ public class SearchResult extends AppCompatActivity {
             ActionBar actionBar = getSupportActionBar();
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.nav_host_fragment_activity_home, new DashboardFragment(CONSTANTS.SEARCHRESULT, this))
+                    .replace(R.id.nav_host_fragment_activity_home, new ListFragment(CONSTANTS.SEARCHRESULT, this))
                     .commit();
 
             assert actionBar != null;

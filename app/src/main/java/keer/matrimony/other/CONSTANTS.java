@@ -11,7 +11,7 @@ import keer.matrimony.models.religious_details;
 
 public class CONSTANTS {
     public static final String BASEURL = "https://matrimony.keersamaj.in/api/";
-    public static final String BASEURLPROFILE = "https://jaikisankgn.org/matrimonial/public/profile/";
+    public static final String BASEURLPROFILE = "https://matrimony.keersamaj.in/public/profile/";
     public static final String PERSONALDETAILS = "update-personal-details/";
     public static final String EDUCATIONDETAILS = "update-edu-details/";
     public static final String PARTNERPREF = "partner-preference/";

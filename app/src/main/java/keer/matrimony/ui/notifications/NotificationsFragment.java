@@ -1,6 +1,7 @@
 package keer.matrimony.ui.notifications;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -54,6 +55,7 @@ import keer.matrimony.models.religious_details;
 import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.other.ImageUpload;
 import keer.matrimony.ui.Activitys.HomeActivity;
+import keer.matrimony.ui.Activitys.LoginActivity;
 import keer.matrimony.utils.common;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -234,6 +236,11 @@ public class NotificationsFragment extends Fragment {
         binding.family.setOnClickListener((View family)->{
             CONSTANTS.family = fd;
             Navigation.findNavController(family).navigate(R.id.action_navigation_notifications_to_EditFamily);
+        });
+        binding.logout.setOnClickListener((View v)->{
+            db.delete(0);
+            startActivity(new Intent(requireContext() , LoginActivity.class));
+            requireActivity().finishAffinity();
         });
 //        binding.motherTongue.setText(model.ge);
         return root;
