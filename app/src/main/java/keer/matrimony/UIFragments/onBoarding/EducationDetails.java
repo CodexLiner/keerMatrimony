@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import keer.matrimony.other.CONSTANTS;
 import keer.matrimony.database.userDatabaseHelper;
@@ -155,10 +156,10 @@ public class EducationDetails extends Fragment {
                     Toast.makeText(getActivity(), "Select Occupation", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(OcuT)){
-                    Toast.makeText(getActivity(), "Select Occupation Type", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                if (TextUtils.isEmpty(OcuT)){
+//                    Toast.makeText(getActivity(), "Select Occupation Type", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
                 if (TextUtils.isEmpty(Prof)){
                     Toast.makeText(getActivity(), "Enter Profession", Toast.LENGTH_SHORT).show();
                     return;
@@ -177,8 +178,8 @@ public class EducationDetails extends Fragment {
                 Log.d("TAG", "onResponseX: "+map.toString());
                 userDatabaseHelper db = new userDatabaseHelper(getContext());
                 userDatabaseModel model = db .getUser(0);
-                ((MainActivity) getActivity()).setPersonalDetails(map , CONSTANTS.EDUCATIONDETAILS , model.getId());
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                ((MainActivity) requireActivity()).setPersonalDetails(map , CONSTANTS.EDUCATIONDETAILS , model.getId());
+                FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
                 FamilyDetails educationDetails = new FamilyDetails();
                 transaction.replace(R.id.ContainerMain , educationDetails);
                 transaction.addToBackStack(null);
